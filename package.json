@@ -1,0 +1,35 @@
+{
+  "name": "@bajo-events/avent-2023",
+  "type": "module",
+  "version": "2.0.0",
+  "private": true,
+  "packageManager": "pnpm@8.7.6",
+  "description": "mini application for special event: Avent 2023",
+  "author": "ChatonDeAru <hi@chatondearu.fr>",
+  "scripts": {
+    "build": "nuxt build",
+    "dev": "nuxt dev",
+    "generate": "nuxt generate",
+    "preview": "nuxt preview",
+    "postinstall": "nuxt prepare"
+  },
+  "dependencies": {
+    "eslint": "8.51.0"
+  },
+  "devDependencies": {
+    "@antfu/eslint-config": "1.0.0-beta.27",
+    "@iconify-json/mdi": "^1.1.12",
+    "@iconify-json/twemoji": "^1.1.12",
+    "@nuxt/devtools": "latest",
+    "@nuxtjs/supabase": "^1.1.4",
+    "@unocss/eslint-config": "0.56.5",
+    "@unocss/nuxt": "0.56.5",
+    "@vueuse/core": "10.5.0",
+    "@vueuse/nuxt": "10.5.0",
+    "chroma-js": "^2.4.2",
+    "floating-vue": "2.0.0-beta.24",
+    "nuxt": "^3.8.2",
+    "nuxt-icon": "^0.6.7",
+    "vue": "^3.3.10"
+  }
+}
