@@ -1,5 +1,5 @@
 <template>
-  <main h-full pt-16 gradient-greendark>
+  <main h-full pt-16>
     <NavigationBar />
     <slot />
     <Footer />

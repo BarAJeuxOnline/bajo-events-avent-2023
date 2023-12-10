@@ -14,10 +14,10 @@ async function logout() {
 
 <template>
   <SectionContainer :padding="false" fixed top-0 z-200 w-full bg-beige-500 text-white shadow-lg>
-    <div h-16 flex justify-between>
+    <div h-16 flex items-center justify-between>
       <nav>
-        <NuxtLink :to="home">
-          <Icon name="i-mdi-home" />
+        <NuxtLink :to="home" btn-animation>
+          <Icon name="i-mdi-home" h-8 w-8 />
         </NuxtLink>
 
         <button

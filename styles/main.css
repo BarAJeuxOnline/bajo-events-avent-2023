@@ -7,13 +7,10 @@ body,
   height: 100%;
   margin: 0;
   padding: 0;
-  background: #eee;
 
   font-family: 'Red Hat Display', sans-serif;
-}
 
-main {
-  @apply bg-white text-black-500 dark:text-white dark:bg-black-800;
+  @apply antialiased gradient-greendark text-black-500 bg-fixed;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -50,4 +47,8 @@ a {
 
 img, svg {
   @apply mx-auto image-render-edge;
+}
+
+.icon {
+  @appliy w-6 h-6;
 }

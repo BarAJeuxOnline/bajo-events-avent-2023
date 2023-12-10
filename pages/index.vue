@@ -6,5 +6,7 @@ definePageMeta({
 </script>
 
 <template>
-  <Login />
+  <SectionContainer style="background-image: url(img/background-001.webp);" min-h-2xl bg-cover>
+    <Login relative />
+  </SectionContainer>
 </template>
