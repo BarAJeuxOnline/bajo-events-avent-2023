@@ -4,14 +4,18 @@ definePageMeta({
   layout: 'default',
 })
 
-const { user, nickname, isAventGranted } = storeToRefs(useDiscord())
+const { user, nickname, isAventGranted, member, loading } = storeToRefs(useDiscord())
 </script>
 
 <template>
   <SectionContainer style="background-image: url(img/background-001.webp);" min-h-2xl bg-cover>
     <Login v-if="!user" relative />
 
-    <div v-else>
+    <div v-else-if="loading" h-screen flex items-center justify-center>
+      <Loader />
+    </div>
+
+    <div v-else-if="member">
       <h1 text-white>
         Hello ! {{ nickname }}
       </h1>

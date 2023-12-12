@@ -1,5 +1,3 @@
-import type { Session } from '@supabase/gotrue-js'
-
 interface DiscordUser {
   id: string
   username: string
@@ -56,11 +54,11 @@ export const useDiscord = defineStore('discord', () => {
   const nickname = computed(() => member.value?.nick || member.value?.user?.global_name || 'un lutin')
   const avatarUrl = computed(() => user.value?.user_metadata?.avatar_url || null)
 
-  async function loadGuildMember(session?: Session): Promise<void> {
+  async function loadGuildMember(providerToken?: string | null): Promise<void> {
     loading.value = true
     tentative.value += 1
 
-    const token = session?.provider_token ? session?.provider_token : await getToken()
+    const token = providerToken || await getToken()
 
     try {
       if (!token)
@@ -88,8 +86,6 @@ export const useDiscord = defineStore('discord', () => {
         return logout()
     }
     catch (error) {
-      loading.value = false
-
       if (import.meta.env.DEV)
         console.error('an error occured', error)
 
@@ -98,6 +94,9 @@ export const useDiscord = defineStore('discord', () => {
 
       else if (error.message === 'You are being rate limited.')
         return retryAfter(error.retry_after || 60 * 1000)
+
+      else
+        loading.value = false
     }
   }
 
@@ -153,13 +152,14 @@ export const useDiscord = defineStore('discord', () => {
     if (import.meta.env.DEV)
       console.info('auth.onAuthStateChange', event, session)
 
+    const { provider_token, user } = session || {}
+
     if (event === 'SIGNED_IN' && !loading.value && !member.value)
-      await useAsyncData('member', () => loadGuildMember(session || undefined))
+      await useAsyncData('member', () => loadGuildMember(provider_token))
 
     if (event === 'USER_UPDATED' || event === 'INITIAL_SESSION') {
-      if (session?.user.user_metadata.guildMember)
-        member.value = session?.user.user_metadata.guildMember
-
+      if (user?.user_metadata.guildMember)
+        member.value = user?.user_metadata.guildMember
       else
         await logout()
     }

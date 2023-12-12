@@ -8,6 +8,8 @@ auth.onAuthStateChange(async (event) => {
   if (event === 'SIGNED_OUT')
     navigateTo('/')
 })
+
+useDiscord()
 </script>
 
 <template>

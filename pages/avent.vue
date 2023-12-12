@@ -2,14 +2,8 @@
 definePageMeta({
   name: 'Avent',
   layout: 'default',
+  middleware: 'avent',
 })
-
-const {
-  isAventGranted,
-} = storeToRefs(useDiscord())
-
-if (!isAventGranted.value)
-  navigateTo('/')
 </script>
 
 <template>

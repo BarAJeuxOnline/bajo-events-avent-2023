@@ -1,18 +1,17 @@
 import * as Sentry from '@sentry/vue'
 
-export default defineNuxtPlugin(() => {
+export default defineNuxtPlugin(({ vueApp }) => {
   const runtimeConfig = useRuntimeConfig()
 
-  if (runtimeConfig.public.SENTRY_DSN) {
+  if (runtimeConfig.public.SENTRY_DSN && !import.meta.env.SSR) {
     const router = useRouter()
 
     Sentry.init({
+      app: vueApp,
       dsn: runtimeConfig.public.SENTRY_DSN,
       integrations: [
         new Sentry.BrowserTracing({
           routingInstrumentation: Sentry.vueRouterInstrumentation(router, { routeLabel: 'path' }),
-          // Set 'tracePropagationTargets' to control for which URLs distributed tracing should be enabled
-          tracePropagationTargets: ['localhost', /^https:\/\/yourserver\.io\/api/],
         }),
         new Sentry.Replay(),
       ],
