@@ -1,16 +1,5 @@
 <script setup lang="ts">
-const user = useSupabaseUser()
-const { auth } = useSupabaseClient()
-const redirectTo = `${useRuntimeConfig().public.baseUrl}/confirm`
-
-watchEffect(() => {
-  if (user.value)
-    navigateTo('/avent')
-})
-
-async function connect() {
-  await auth.signInWithOAuth({ provider: 'discord', options: { redirectTo } })
-}
+const { signin } = useDiscord()
 </script>
 
 <template>
@@ -24,7 +13,7 @@ async function connect() {
       <p text-right>
         <button
           btn bg-blue-600 text-white
-          @click="() => connect()"
+          @click.prevent="() => signin()"
         >
           <Icon name="i-mdi-discord" label="Discord" mr-2 /> Discord Connect
         </button>

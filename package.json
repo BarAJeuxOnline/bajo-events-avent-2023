@@ -22,6 +22,8 @@
     "@iconify-json/twemoji": "^1.1.12",
     "@nuxt/devtools": "latest",
     "@nuxtjs/supabase": "^1.1.4",
+    "@pinia/nuxt": "^0.5.1",
+    "@sentry/vue": "^7.86.0",
     "@unocss/eslint-config": "0.56.5",
     "@unocss/nuxt": "0.56.5",
     "@vueuse/core": "10.5.0",

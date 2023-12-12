@@ -6,16 +6,41 @@ definePageMeta({
 
 const user = useSupabaseUser()
 
-watch(user, () => {
-  if (user.value)
-    return navigateTo('/avent')
-}, { immediate: true })
+const {
+  member,
+  isAventGranted,
+} = storeToRefs(useDiscord())
+
+whenever(member, async () => {
+  await nextTick()
+  if (isAventGranted.value)
+    navigateTo('/avent')
+  else
+    navigateTo('/')
+})
+
+const showButton = useTimeout(5000)
 </script>
 
 <template>
   <div>
-    <p class="u-text-black">
-      Redirecting...
+    <p text-white>
+      <Loader />
+      <template v-if="!user">
+        Chargement de la liste du père Noel
+      </template>
+      <template v-else-if="!member">
+        Chargement de la liste des lutins
+      </template>
+      <template v-else>
+        Préparation des cadeaux pour les enfants sages
+      </template>
+      ...
+    </p>
+    <p v-if="showButton">
+      <button btn>
+        Retourner à l'accueil
+      </button>
     </p>
   </div>
 </template>

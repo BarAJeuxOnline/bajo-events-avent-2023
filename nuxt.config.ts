@@ -2,17 +2,11 @@ import pkg from './package.json'
 
 export default defineNuxtConfig({
   devtools: { enabled: true },
-  typescript: {
-    includeWorkspace: true,
-    tsConfig: {
-      compilerOptions: {
-        baseUrl: '.', // for absolute imports
-      },
-    },
-  },
   runtimeConfig: {
     public: {
-      env: '',
+      SENTRY_DSN: process.env.NUXT_PUBLIC_SENTRY_DSN || null,
+      baseUrl: process.env.NUXT_PUBLIC_BASE_URL || 'http://localhost:3000',
+      guildId: process.env.NUXT_PUBLIC_DISCORD_GUILD_ID || null,
     },
   },
 
@@ -21,6 +15,7 @@ export default defineNuxtConfig({
     '@vueuse/nuxt',
     '@nuxtjs/supabase',
     'nuxt-icon',
+    '@pinia/nuxt',
   ],
 
   imports: {

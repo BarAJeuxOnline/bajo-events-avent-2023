@@ -145,7 +145,7 @@ export default function presetBajoTheme(): Preset {
         'btn-disabled': 'disabled:pointer-events-none',
         'btn-animation': 'active:hover:scale-95 active:hover:transition active:focus:scale-95 active:focus:transition',
         'btn-hover': 'hover:bg-opacity-90 hover:transition hover:duration-200',
-        'btn': 'rounded-2 inline-flex btn-md btn-glass btn-hover shrink-0 cursor-pointer select-none flex-wrap items-center justify-center border-transparent text-center btn-animation',
+        'btn': 'rounded-2 inline-flex btn-md btn-glass btn-hover shrink-0 cursor-pointer select-none flex-wrap items-center justify-center border-transparent text-center btn-animation whitespace-nowrap text-ellipsis',
         'btn-primary': 'btn gradient-green text-white',
         'btn-glass': 'bg-black-500/20 dark:bg-white/20',
         'btn-primary-dark': 'btn gradient-greendark text-white',
