@@ -153,18 +153,23 @@ export const useDiscord = defineStore('discord', () => {
       console.info('auth.onAuthStateChange', event, session)
 
     const { provider_token, user } = session || {}
+    const guildMember = user?.user_metadata.guildMember
 
     if (event === 'SIGNED_IN' && !loading.value && !member.value)
       await useAsyncData('member', () => loadGuildMember(provider_token))
 
-    if (event === 'USER_UPDATED' || event === 'INITIAL_SESSION') {
-      if (user?.user_metadata.guildMember)
-        member.value = user?.user_metadata.guildMember
+    if (event === 'USER_UPDATED') {
+      if (guildMember)
+        member.value = guildMember
       else
         await logout()
     }
 
-    else if (event === 'SIGNED_OUT') { $reset() }
+    if (event === 'INITIAL_SESSION' && guildMember)
+      member.value = guildMember
+
+    else if (event === 'SIGNED_OUT')
+      $reset()
   })
 
   return {
