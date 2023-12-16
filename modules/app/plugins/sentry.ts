@@ -3,7 +3,7 @@ import * as Sentry from '@sentry/vue'
 export default defineNuxtPlugin(({ vueApp }) => {
   const runtimeConfig = useRuntimeConfig()
 
-  if (runtimeConfig.public.SENTRY_DSN && !import.meta.env.SSR) {
+  if (runtimeConfig.public.SENTRY_DSN && !import.meta.env.SSR && !import.meta.env.DEV) {
     const router = useRouter()
 
     Sentry.init({

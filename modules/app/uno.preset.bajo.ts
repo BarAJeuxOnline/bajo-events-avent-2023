@@ -1,3 +1,4 @@
+import { entriesToCss } from '@unocss/core'
 import type { Preset } from 'unocss'
 import chroma from 'chroma-js'
 
@@ -132,12 +133,17 @@ export default function presetBajoTheme(): Preset {
       // typography
       {
         'text-gradient': 'bg-clip-text text-transparent',
+        'text-help': 'text-sm text-gray-500',
         'p-section': 'py-8 md:py-24',
       },
 
       // containers
       {
         'border-container': 'border-1 border-grey-100 rounded-lg',
+        'content-container': 'container mx-auto px-4 py-10 md:px-8',
+        'block-4': 'p-2 md:p-4',
+        'block-8': 'p-4 md:p-8',
+        'block-16': 'p-8 md:p-16',
       },
 
       // buttons
@@ -145,7 +151,7 @@ export default function presetBajoTheme(): Preset {
         'btn-disabled': 'disabled:pointer-events-none',
         'btn-animation': 'active:hover:scale-95 active:hover:transition active:focus:scale-95 active:focus:transition',
         'btn-hover': 'hover:bg-opacity-90 hover:transition hover:duration-200',
-        'btn': 'rounded-2 inline-flex btn-md btn-glass btn-hover shrink-0 cursor-pointer select-none flex-wrap items-center justify-center border-transparent text-center btn-animation whitespace-nowrap text-ellipsis',
+        'btn': 'rounded-2 inline-flex btn-md btn-glass btn-hover btn-animation shrink-0 cursor-pointer select-none flex-wrap items-center justify-center border-transparent text-center whitespace-nowrap text-ellipsis',
         'btn-primary': 'btn gradient-green text-white',
         'btn-glass': 'bg-black-500/20 dark:bg-white/20',
         'btn-primary-dark': 'btn gradient-greendark text-white',
@@ -157,7 +163,79 @@ export default function presetBajoTheme(): Preset {
 
       // forms
       {
+        'form-label': 'text-sm font-medium text-gray-700',
+        'form-input-full': 'form-input w-full block',
         'form-input': 'block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-green-500 focus:border-green-500 sm:text-sm',
+      },
+
+      // Link
+      {
+        clickable: 'cursor-pointer select-none',
+        link: 'clickable text-blue-500 underline underline-offset-4 hover:underline-offset-8 transition-all duration-200 font-bold',
+      },
+    ],
+    preflights: [
+      {
+        getCSS: ({ theme }) => {
+          return Object.entries({
+            'h1,h2,h3,h4,h5,p': {
+              'font-size': theme.fontSize.base[0],
+              'line-height': theme.fontSize.base[1],
+              'margin-top': theme.spacing.DEFAULT,
+            },
+            'h1,h2,h3,h4,h5': {
+              'font-weight': 700,
+            },
+            'h1': {
+              'font-size': theme.fontSize['5xl'][0],
+              'line-height': theme.fontSize['5xl'][1],
+            },
+            'h2': {
+              'font-size': theme.fontSize['4xl'][0],
+              'line-height': theme.fontSize['4xl'][1],
+            },
+            'h3': {
+              'font-size': theme.fontSize['3xl'][0],
+              'line-height': theme.fontSize['3xl'][1],
+            },
+            'h4': {
+              'font-size': theme.fontSize['2xl'][0],
+              'line-height': theme.fontSize['2xl'][1],
+            },
+            'h5': {
+              'font-size': theme.fontSize.xl[0],
+              'line-height': theme.fontSize.xl[1],
+            },
+            'a': {
+              cursor: 'pointer',
+            },
+            'img,svg': {
+              'max-width': '100%',
+              'image-rendering': 'crisp-edges',
+            },
+            'table': {
+              'border': `1px solid ${theme.colors.gray[100]}`,
+              'border-collapse': 'collapse',
+              'width': '100%',
+            },
+            'table th,table td': {
+              border: `1px solid ${theme.colors.gray[100]}`,
+              padding: theme.spacing.DEFAULT,
+            },
+            'table td': {
+              'font-weight': 700,
+            },
+            '.icon': {
+              width: '1em',
+              height: '1em',
+            },
+          })
+            .map(([root, obj]) => {
+              const css = entriesToCss(Object.entries(obj))
+              return `${root} {${css}}`
+            })
+            .join('')
+        },
       },
     ],
   }

@@ -6,11 +6,11 @@ const router = useRouter()
   <main h-full bg-emerald-5>
     <NavigationBar />
     <div text-4xl>
-      <div i-carbon-warning inline-block />
+      <div i-mdi-warning inline-block />
     </div>
     <slot />
     <div>
-      <button btn text-sm m="3 t8" @click="router.back()">
+      <button text-sm btn m="3 t8" @click="router.back()">
         Retour
       </button>
     </div>

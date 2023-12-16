@@ -32,7 +32,7 @@ const { user, nickname, isAventGranted, member, loading } = storeToRefs(useDisco
           </p>
           <p text-center>
             <button
-              btn bg-blue-600 text-white shadow-md
+              bg-blue-600 text-white shadow-md btn
               @click="() => navigateTo('/avent')"
             >
               <Icon name="i-twemoji-party-popper" label="Discord" mr-2 /> Ouvrir le calendrier de l'avent

@@ -1,0 +1,16 @@
+{
+  "folders": [
+    {
+      "name": "ROOT",
+      "path": "../"
+    },
+    {
+      "name": "app",
+      "path": "../modules/app"
+    },
+    {
+      "name": "supabase",
+      "path": "../modules/supabase"
+    }
+  ],
+}
