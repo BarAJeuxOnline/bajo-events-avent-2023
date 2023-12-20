@@ -8,7 +8,7 @@ const { user, nickname, isAventGranted, member, loading } = storeToRefs(useDisco
 </script>
 
 <template>
-  <SectionContainer style="background-image: url(img/background-001.webp);" min-h-2xl bg-cover>
+  <SectionContainer :style="`background-image: url(img/background-00${Math.floor(Math.random() * 2) + 1}.webp);`" h-full min-h-2xl bg-cover>
     <Login v-if="!user" relative />
 
     <div v-else-if="loading" h-screen flex items-center justify-center>

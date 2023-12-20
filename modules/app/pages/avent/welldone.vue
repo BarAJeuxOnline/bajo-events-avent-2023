@@ -1,5 +1,8 @@
 <script setup lang="ts">
-
+defineOptions({
+  name: 'WellDone',
+  middleware: ['avent'],
+})
 </script>
 
 <template>

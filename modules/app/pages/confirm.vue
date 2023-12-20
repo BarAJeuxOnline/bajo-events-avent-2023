@@ -27,7 +27,7 @@ whenever(member, async () => {
     navigateTo('/avent')
   else
     navigateTo('/')
-})
+}, { immediate: true })
 
 const showButton = useTimeout(5000)
 

@@ -16,9 +16,9 @@ const {
       </NuxtLink>
 
       <template v-if="member">
-        <span align-middle>
+        <p mt-0 flex items-center justify-between gap-4>
           <strong>{{ nickname }}</strong> <UserAvatar />
-        </span>
+        </p>
 
         <button
           btn
