@@ -84,6 +84,48 @@ router
             codes,
             validated_codes: validatedCodes,
             nbr_tickets: validatedCodes.filter(v => !!v).length,
+            completed: validatedCodes.filter(v => !!v).length === 24,
+            total_tickets: validatedCodes.filter(v => !!v).length + (calendar.gold_ticket ? 5 : 0),
+          })
+          .eq('id', calendar.id)
+          .select()
+          .single()
+
+        if (error) {
+          throw new Error(error.message)
+        }
+        else {
+          context.response.headers.set('Content-Type', 'application/json')
+          context.response.body = JSON.stringify(updatedCalendar)
+        }
+      }
+    }
+    catch (error) {
+      context.response.status = 400
+      context.response.body = error.message
+    }
+  })
+  .post('/avent-api/gold', async (context) => {
+    try {
+      const client = getClient(context)
+      const user = await getUser(context)
+
+      if (!user) { throw new Error('User not found') }
+
+      else {
+        const calendar = await getCalendarOrCreate(client, user.id)
+
+        if (calendar.gold_ticket)
+          throw new Error('Gold ticket already used')
+
+        if (!calendar.completed)
+          throw new Error('Calendar not completed')
+
+        const { data: updatedCalendar, error } = await client
+          .from('event_avent_calendar')
+          .update({
+            gold_ticket: true,
+            total_tickets: calendar.nbr_tickets + (calendar.gold_ticket ? 5 : 0),
           })
           .eq('id', calendar.id)
           .select()

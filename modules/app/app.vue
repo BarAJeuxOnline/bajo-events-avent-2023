@@ -10,6 +10,7 @@ auth.onAuthStateChange(async (event) => {
 })
 
 useDiscord()
+useAvent()
 </script>
 
 <template>
