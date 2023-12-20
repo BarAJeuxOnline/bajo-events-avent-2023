@@ -1,0 +1,24 @@
+{
+  "name": "@bajo-avent-2023/supabase",
+  "type": "module",
+  "version": "2.0.0",
+  "private": true,
+  "packageManager": "pnpm@8.7.6",
+  "description": "mini application for special event: Avent 2023",
+  "author": "ChatonDeAru <hi@chatondearu.fr>",
+  "scripts": {
+    "start": "supabase start",
+    "stop": "supabase stop",
+    "db:pull": "supabase db pull",
+    "db:migrate": "supabase migration up",
+    "db:push": "supabase db push",
+    "db:reset": "supabase db reset",
+    "functions:watch": "supabase functions serve",
+    "functions:deploy": "supabase functions deploy",
+    "auth:pull": "supabase db pull --schema auth"
+  },
+  "devDependencies": {
+    "@antfu/eslint-config": "1.0.0-beta.27",
+    "supabase": "^1.123.4"
+  }
+}

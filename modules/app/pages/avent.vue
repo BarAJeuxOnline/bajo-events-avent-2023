@@ -1,70 +1,87 @@
 <script setup lang="ts">
+import type { Database } from '@/types/database.types'
+
 definePageMeta({
   name: 'Avent',
   layout: 'default',
   middleware: 'avent',
 })
 
-interface SupabaseEventAventCalendar {
-  id: string
-  member: string
-  codes: string
+interface Calendar {
+  codes: string[] | null
+  completed: boolean
   created_at: string
-  updated_at: string
+  gold_ticket: boolean
+  id: string
+  nbr_tickets: number | null
+  total_tickets: number
+  user: string
+  validated_codes: string[] | null
+  win_position: number | null
 }
 
-const client = useSupabaseClient()
+const client = useSupabaseClient<Database>()
 const user = useSupabaseUser()
 
-const codes = ref<string[]>([])
-const calendar = ref<SupabaseEventAventCalendar | null>(null)
+const codesModel = ref<string[]>([])
+const calendar = ref<Calendar | null>(null)
 const isLoading = ref<boolean>(true)
 
 onMounted(async () => {
   isLoading.value = true
 
-  const { data } = await client
+  const { data: dataCalendar } = await client
     .from('event_avent_calendar')
     .select('*')
-    .eq('member', user.value?.id)
+    .eq('user', user.value?.id)
+    .single()
 
   // TODO: handle error
 
-  if (data && data.length > 0) { calendar.value = data[0] }
-  else {
-    const { data } = await client
-      .from('event_avent_calendar')
-      .insert({
-        member: user.value?.id,
-        codes: [],
-      })
-
-    // TODO: handle error
-
-    if (data && data.length > 0)
-      calendar.value = data[0]
+  if (dataCalendar) {
+    calendar.value = dataCalendar
+    codesModel.value = dataCalendar.codes?.slice() || []
   }
-
-  if (calendar.value)
-    codes.value = calendar.value.codes
 
   isLoading.value = false
 })
 
-async function updateCodes(newCodes) {
-  return await client
-    .from('event_avent_calendar')
-    .update({
-      codes: toRaw(newCodes),
+async function updateCodes(codes: string[]) {
+  isLoading.value = true
+
+  try {
+    const { data, error } = await client.functions.invoke('avent-api/codes', {
+      method: 'POST',
+      body: {
+        codes,
+      },
     })
-    .eq('id', calendar.value?.id)
+
+    if (error)
+      throw error
+
+    if (data)
+      calendar.value = data
+  }
+  catch (error) {
+    console.error(error)
+  }
+
+  isLoading.value = false
 }
 
-watchDebounced(codes, async (newCodes) => {
-  const formattedCodes = newCodes.map(code => code && code.trim().slice(0, 4).toUpperCase())
+watchDebounced(codesModel, async (newCodes) => {
+  const raw = toRaw(newCodes)
+  const formattedCodes = raw.map(code => code && code.trim().slice(0, 4).toUpperCase())
+
+  if (formattedCodes.toString() === calendar.value?.codes?.toString())
+    return
+
   await updateCodes(formattedCodes)
-  codes.value = formattedCodes
-}, { debounce: 500, maxWait: 1000, deep: true })
+
+  if (formattedCodes.toString() !== raw.toString())
+    codesModel.value = formattedCodes
+}, { debounce: 1000, maxWait: 2000, deep: true })
 </script>
 
 <template>
@@ -87,24 +104,33 @@ watchDebounced(codes, async (newCodes) => {
   </SectionContainer>
 
   <SectionContainer style="background-image: url(img/background-002.webp);" min-h-2xl bg-cover>
-    <div v-if="isLoading">
-      <Loader />
-    </div>
-    <div v-else grid grid-cols="2 md:5" gap="4 md:8">
+    <div grid grid-cols="2 md:5" gap="4 md:8">
       <div
         v-for="i in 24"
         :key="i"
-        aspect="[4/3]" max-w="60 md:none" rounded-2 bg-white p-4 text-center shadow-md
+        aspect="[4/3]" max-w="60 md:none" relative flex items-center justify-center rounded-2 bg-white text-center shadow-md
       >
-        <h2>{{ i }}</h2>
-        <input
-          v-model.trim="codes[i - 1]"
-          type="text"
-          placeholder="####"
-          maxlength="4"
-          w-full b-1 b-beige-400 rounded-full bg-white p-2 text-center
-        >
+        <div v-if="calendar?.validated_codes?.[i - 1]" absolute inset-0 flex items-center justify-center bg="white/20">
+          <img :src="`/img/codes/case_${i}_${calendar.validated_codes[i - 1]}.png`" max-w-full w-full>
+        </div>
+        <template v-else>
+          <div v-if="isLoading" absolute inset-0 bg="white/70" flex items-center justify-center>
+            <Loader h-8 w-8 text-gray-300 />
+          </div>
+          <div p-4>
+            <h2 mt-0>
+              {{ i }}
+            </h2>
+            <input
+              v-model.trim="codesModel[i - 1]"
+              type="text"
+              placeholder="####"
+              maxlength="4"
+              w-full b-1 b-beige-400 rounded-full bg-white p-2 text-center
+            >
+          </div>
+        </template>
       </div>
     </div>
-  </SectionContainer>
+  </sectioncontainer>
 </template>

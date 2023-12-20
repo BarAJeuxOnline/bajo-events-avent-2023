@@ -9,8 +9,8 @@
       "path": "../modules/app"
     },
     {
-      "name": "supabase",
-      "path": "../modules/supabase"
+      "name": "playground",
+      "path": "../modules/playground"
     }
   ],
 }
