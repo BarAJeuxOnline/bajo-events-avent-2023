@@ -10,5 +10,5 @@ body,
 
   font-family: 'Red Hat Display', sans-serif;
 
-  @apply antialiased gradient-greendark text-black-500 bg-fixed;
+  @apply antialiased bg-green-500 text-black-500 bg-fixed;
 }

@@ -148,10 +148,6 @@ export const useDiscord = defineStore('discord', () => {
   }
 
   auth.onAuthStateChange(async (event, session) => {
-    // we are updating metadata only when the user is logged in
-    if (import.meta.env.DEV)
-      console.info('auth.onAuthStateChange', event, session)
-
     const { provider_token, user } = session || {}
     const guildMember = user?.user_metadata.guildMember
 

@@ -9,9 +9,9 @@ const { signin } = useDiscord()
     </h1>
 
     <Card mt-8>
-      <p mx-auto max-w-md>
+      <h5 mx-auto max-w-md>
         Connecte toi avec ton compte Discord pour accéder au calendrier de l'avent 2023 spécial du BAJO <Icon name="i-twemoji-party-popper" />
-      </p>
+      </h5>
 
       <p mx-auto mt-8 max-w-md>
         <button
@@ -22,8 +22,8 @@ const { signin } = useDiscord()
         </button>
       </p>
 
-      <p text-help>
-        Ce site ainsi que la base de donnée s'auto détruira automatiquement après le passage de l'homme en rouge.
+      <p mt-16 text-center text-help>
+        Ce site ainsi que la base de donnée s'auto détruira automatiquement après le passage de l'homme en rouge. <Icon name="i-twemoji-christmas-tree" label="Discord" mr-2 />
       </p>
     </Card>
   </SectionContainer>

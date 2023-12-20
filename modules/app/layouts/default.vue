@@ -3,9 +3,11 @@ useNeige()
 </script>
 
 <template>
-  <main h-full pt-16>
+  <main h-full flex flex-col>
     <NavigationBar />
-    <slot />
+    <div flex-1>
+      <slot />
+    </div>
     <Footer />
   </main>
 </template>

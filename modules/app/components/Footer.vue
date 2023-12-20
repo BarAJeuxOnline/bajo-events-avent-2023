@@ -1,5 +1,5 @@
 <template>
-  <SectionContainer>
+  <SectionContainer gradient-greendark>
     <footer text-white>
       <div container>
         <p p-8 text-center>

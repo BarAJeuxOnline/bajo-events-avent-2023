@@ -141,6 +141,7 @@ export default function presetBajoTheme(): Preset {
       {
         'border-container': 'border-1 border-grey-100 rounded-lg',
         'content-container': 'container mx-auto px-4 py-10 md:px-8',
+        'row-container': 'flex md:flex-row flex-col gap-4 md:gap-8',
         'block-4': 'p-2 md:p-4',
         'block-8': 'p-4 md:p-8',
         'block-16': 'p-8 md:p-16',
