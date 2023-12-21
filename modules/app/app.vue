@@ -9,12 +9,12 @@ auth.onAuthStateChange(async (event) => {
     navigateTo('/')
 })
 
-useDiscord()
+const { isReady } = storeToRefs(useDiscord())
 useAvent()
 </script>
 
 <template>
   <NuxtLayout>
-    <NuxtPage />
+    <NuxtPage v-if="isReady" />
   </NuxtLayout>
 </template>

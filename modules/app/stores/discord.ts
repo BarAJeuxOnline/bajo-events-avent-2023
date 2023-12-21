@@ -44,6 +44,7 @@ export const useDiscord = defineStore('discord', () => {
 
   const guildId = useRuntimeConfig().public.guildId
   const member = ref<DiscordGuildMember | null>(null)
+  const isReady = ref(false)
   const loading = ref(false)
   const tentative = ref(0)
 
@@ -156,6 +157,9 @@ export const useDiscord = defineStore('discord', () => {
     const { provider_token, user } = session || {}
     const guildMember = user?.user_metadata.guildMember
 
+    if (import.meta.env.DEV)
+      console.log('discord auth state change:', event, session)
+
     if (
       (event === 'SIGNED_IN' || (event === 'INITIAL_SESSION' && user && !guildMember))
       && !loading.value
@@ -172,10 +176,14 @@ export const useDiscord = defineStore('discord', () => {
     else if (event === 'INITIAL_SESSION' && guildMember) { member.value = guildMember }
 
     else if (event === 'SIGNED_OUT') { $reset() }
+
+    if (event === 'INITIAL_SESSION')
+      isReady.value = true
   })
 
   return {
     loading,
+    isReady,
     tentative,
     user,
     member,
