@@ -28,14 +28,17 @@ export const useAvent = defineStore('avent', () => {
   async function loadAvent() {
     loading.value = true
 
-    const { data: dataCalendar } = await client
+    const { data, error } = await client
       .from('event_avent_calendar')
       .select('*')
       .eq('user', user.value?.id)
-      .single()
+      .maybeSingle()
 
-    if (dataCalendar)
-      calendar.value = dataCalendar
+    if (error)
+      console.error('cannot load user\'s calendar: ', error.message)
+
+    else if (data)
+      calendar.value = data
 
     loading.value = false
   }

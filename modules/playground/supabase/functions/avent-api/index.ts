@@ -23,12 +23,12 @@ async function getPayload(context: any) {
 async function getCalendarOrCreate(client, userId: string) {
   const { data: calendar } = await client
     .from('event_avent_calendar')
-    .select('*')
+    .select()
     .eq('user', userId)
-    .single()
+    .maybeSingle()
 
   if (!calendar) {
-    const { data: calendar } = await client
+    const { data: newCalendar } = await client
       .from('event_avent_calendar')
       .insert({
         user: userId,
@@ -37,8 +37,10 @@ async function getCalendarOrCreate(client, userId: string) {
       .select()
       .single()
 
-    if (!calendar)
+    if (!newCalendar)
       throw new Error('Calendar not found, cannot create new one')
+
+    return newCalendar
   }
 
   return calendar
@@ -77,6 +79,9 @@ router
       else {
         const calendar = await getCalendarOrCreate(client, user.id)
         const validatedCodes = validateCodes(codes)
+
+        if (!calendar)
+          throw new Error('Calendar not found')
 
         const { data: updatedCalendar, error } = await client
           .from('event_avent_calendar')

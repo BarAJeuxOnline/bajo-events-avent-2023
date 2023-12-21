@@ -36,16 +36,16 @@ watchDebounced(codesModel, async (newCodes) => {
         <h1>Calendrier</h1>
 
         <p>
-          Bravo ! Tu as participé au calendrier de l'avent du Bar à Jeu Online 2023.
+          Bravo ! Tu as participé au calendrier de l'avent du Bar à Jeu Online 2023.<br>
           Il est temps de rassembler les cases du calendrier tombées au fur et à mesure des jours et de les enregistrer ici. <Icon name="i-twemoji-floppy-disk" />
         </p>
 
         <p>
-          Réussi à compléter au moins une case pour valider ta participation à la tombola de Noel 2023.
+          Réussi à compléter au moins une case pour valider ta participation à la tombola de Noel 2023.<br>
           <Icon name="i-twemoji-sparkles" /> Chaque case enregistrée est un ticket vers la gloire.
         </p>
         <p>
-          Que se passera t'il si tu réussis à compléter tout le calendrier ? <Icon name="i-twemoji-see-no-evil-monkey" />
+          Que se passera t'il si tu réussis à compléter tout le calendrier ? <Icon name="i-twemoji-see-no-evil-monkey" /><br>
           C'est Noel ! Aide toi de tes proches sur le BAJO pour essayer de le compléter ~ Un blackmarket <Icon name="i-twemoji-eyes" /> <Icon name="i-twemoji-face-with-peeking-eye" />
         </p>
       </div>
