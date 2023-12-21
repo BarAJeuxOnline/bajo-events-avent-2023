@@ -2,6 +2,8 @@ import { entriesToCss } from '@unocss/core'
 import type { Preset } from 'unocss'
 import chroma from 'chroma-js'
 
+const isString = value => typeof value === 'string' || value instanceof String
+
 const fontSize = {
   'xs': 0.75,
   'sm': 0.875,
@@ -19,6 +21,18 @@ const sizes = {
   sm: 8,
   md: 12,
   lg: 16,
+}
+
+const variantsColors = {
+  default: {
+    bg: 'teal-100',
+    text: 'gray-500',
+    border: 'gray-500',
+  },
+  info: 'blue',
+  success: 'teal',
+  danger: 'red',
+  warning: 'amber',
 }
 
 function getGradient(from: string, to: string, orientation = '180deg') {
@@ -167,6 +181,25 @@ export default function presetBajoTheme(): Preset {
         'form-label': 'text-sm font-medium text-gray-700',
         'form-input-full': 'form-input w-full block',
         'form-input': 'block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-green-500 focus:border-green-500 sm:text-sm',
+      },
+
+      // Alerts
+      [
+        /^variant-(default|info|success|danger|warning)(-border)?/,
+        ([, variant, border]) => {
+          const v = variantsColors[variant]
+          return isString(v)
+            ? `bg-${v}-100 text-${v}-700${
+                border ? ` border-1 border-${v}-500` : ''
+              }`
+            : `bg-${v.bg} text-${v.text}${
+                border ? ` border-1 border-${v.border}` : ''
+              }`
+        },
+      ],
+      {
+        alert: 'variant-default-border rounded-xl p-4 shadow-sm',
+        callout: 'variant-default rounded-xl p-4 mt-4',
       },
 
       // Link

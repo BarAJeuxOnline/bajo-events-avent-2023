@@ -50,8 +50,8 @@ export const useDiscord = defineStore('discord', () => {
   // const isAdmin = computed(() => member.value?.permissions ? (Number.parseInt(member.value?.permissions) & 0x8) === 0x8 : false)
   const isOwner = computed(() => member.value?.roles?.includes(OWNER_ROLE_ID))
   const isStaff = computed(() => member.value?.roles?.includes(STAFF_ROLE_ID))
-  const isAventGranted = computed(() => member.value?.roles?.includes(CALENDAR_ROLE_ID) || isStaff.value || isOwner.value)
-  const nickname = computed(() => member.value?.nick || member.value?.user?.global_name || 'un lutin')
+  const isAventGranted = computed(() => member.value?.roles?.includes(CALENDAR_ROLE_ID))
+  const nickname = computed(() => member.value?.nick || member.value?.user?.global_name || member.value?.user?.username || 'un lutin')
   const avatarUrl = computed(() => user.value?.user_metadata?.avatar_url || null)
 
   async function loadGuildMember(providerToken?: string | null): Promise<void> {

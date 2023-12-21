@@ -7,7 +7,10 @@ export default defineNuxtRouteMiddleware(async (to, _from) => {
   if (!isAventGranted.value)
     return navigateTo('/')
 
-  const { calendar } = storeToRefs(useAvent())
+  const { calendar, loading } = storeToRefs(useAvent())
+
+  if (loading.value)
+    await until(calendar).not.toBeNull({ timeout: 10000 })
 
   if (to.path === '/avent/welldone') {
     if (!calendar.value?.completed)

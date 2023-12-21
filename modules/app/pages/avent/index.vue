@@ -30,7 +30,7 @@ watchDebounced(codesModel, async (newCodes) => {
 </script>
 
 <template>
-  <SectionContainer text-white>
+  <SectionContainer text-white text-shadow>
     <div row-container>
       <div flex-1>
         <h1>Calendrier</h1>

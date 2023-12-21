@@ -1,7 +1,8 @@
 <script setup lang="ts">
 defineOptions({
   name: 'WellDone',
-  middleware: ['avent'],
+  layout: 'default',
+  middleware: 'avent',
 })
 </script>
 
