@@ -9,7 +9,6 @@
   "scripts": {
     "build": "nuxt build",
     "dev": "nuxt dev",
-    "generate": "nuxt generate",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare"
   },
@@ -24,6 +23,8 @@
     "@nuxtjs/supabase": "^1.1.4",
     "@pinia/nuxt": "^0.5.1",
     "@sentry/vue": "^7.86.0",
+    "@tsparticles/engine": "^3.0.2",
+    "@tsparticles/preset-confetti": "^3.0.0",
     "@unocss/core": "^0.58.0",
     "@unocss/eslint-config": "0.56.5",
     "@unocss/nuxt": "0.56.5",
@@ -33,6 +34,7 @@
     "floating-vue": "2.0.0-beta.24",
     "nuxt": "^3.8.2",
     "nuxt-icon": "^0.6.7",
+    "vite-plugin-vsharp": "^1.6.0",
     "vue": "^3.3.10"
   }
 }

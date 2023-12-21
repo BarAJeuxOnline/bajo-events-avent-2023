@@ -1,3 +1,4 @@
+import vsharp from 'vite-plugin-vsharp'
 import pkg from './package.json'
 
 export default defineNuxtConfig({
@@ -44,7 +45,7 @@ export default defineNuxtConfig({
   },
 
   nitro: {
-    preset: 'node-server',
+    // preset: 'node-server',
     output: {
       dir: './dist',
     },
@@ -52,6 +53,7 @@ export default defineNuxtConfig({
     externals: {
       external: Object.keys(pkg.dependencies),
     },
+    static: true,
   },
 
   css: [
@@ -73,6 +75,9 @@ export default defineNuxtConfig({
         defineModel: true,
       },
     },
+    plugins: [
+      vsharp(),
+    ],
   },
 
   supabase: {
