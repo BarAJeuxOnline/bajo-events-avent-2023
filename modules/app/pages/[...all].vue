@@ -2,6 +2,7 @@
 definePageMeta({
   name: '404',
   layout: '404',
+  path: '/404',
 })
 </script>
 

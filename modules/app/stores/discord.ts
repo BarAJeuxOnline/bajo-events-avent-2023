@@ -111,6 +111,11 @@ export const useDiscord = defineStore('discord', () => {
   }
 
   async function signin() {
+    // TODO use last token to reconnect if possible :
+    // const { data, error } = await supabase.auth.signInWithIdToken({
+    //   provider: 'google',
+    //   token: 'your-id-token'
+    // })
     const redirectTo = `${useRuntimeConfig().public.baseUrl}/confirm`
     await auth.signInWithOAuth({ provider: 'discord', options: { redirectTo, scopes: 'guilds, guilds.members.read' } })
   }

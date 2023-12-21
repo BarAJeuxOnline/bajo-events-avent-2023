@@ -1,5 +1,5 @@
 <script setup lang="ts">
-defineOptions({
+definePageMeta({
   name: 'WellDone',
   layout: 'default',
   middleware: 'avent',
