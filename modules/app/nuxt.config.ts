@@ -4,7 +4,6 @@ import pkg from './package.json'
 export default defineNuxtConfig({
   devtools: { enabled: true },
   ssr: false,
-  target: 'server',
 
   runtimeConfig: {
     public: {
