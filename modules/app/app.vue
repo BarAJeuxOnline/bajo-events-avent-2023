@@ -11,6 +11,10 @@ auth.onAuthStateChange(async (event) => {
 
 const { isReady } = storeToRefs(useDiscord())
 useAvent()
+
+useSeoMeta({
+  title: 'Calendrier de l\'avent 2023 - Bar à Jeu Online.',
+})
 </script>
 
 <template>

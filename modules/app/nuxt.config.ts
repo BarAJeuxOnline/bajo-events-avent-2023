@@ -2,7 +2,14 @@ import vsharp from 'vite-plugin-vsharp'
 import pkg from './package.json'
 
 export default defineNuxtConfig({
-  devtools: { enabled: true },
+  modules: [
+    '@unocss/nuxt',
+    '@vueuse/nuxt',
+    '@nuxtjs/supabase',
+    '@pinia/nuxt',
+    'nuxt-icon',
+  ],
+
   ssr: false,
 
   runtimeConfig: {
@@ -13,21 +20,37 @@ export default defineNuxtConfig({
     },
   },
 
-  modules: [
-    '@unocss/nuxt',
-    '@vueuse/nuxt',
-    '@nuxtjs/supabase',
-    'nuxt-icon',
-    '@pinia/nuxt',
-  ],
+  experimental: {
+    payloadExtraction: false,
+    inlineSSRStyles: false,
+    renderJsonPayloads: true,
+    typedPages: true,
+  },
 
-  imports: {
-    // presets: [
-    //   {
-    //     from: '@vueuse/core',
-    //     imports: ['set', 'get'],
-    //   }
-    // ],
+  nitro: {
+    sourceMap: false,
+    externals: {
+      external: Object.keys(pkg.dependencies),
+    },
+    routeRules: {
+      '/*': {
+        cors: true,
+      },
+    },
+  },
+
+  vite: {
+    vue: {
+      script: {
+        defineModel: true,
+      },
+    },
+    server: {
+      cors: true,
+    },
+    plugins: [
+      vsharp(),
+    ],
   },
 
   components: [
@@ -36,26 +59,6 @@ export default defineNuxtConfig({
       pathPrefix: false,
     },
   ],
-
-  experimental: {
-    // when using generate, payload js assets included in sw precache manifest
-    // but missing on offline, disabling extraction it until fixed
-    payloadExtraction: false,
-    inlineSSRStyles: false,
-    renderJsonPayloads: true,
-    typedPages: true,
-  },
-
-  nitro: {
-    // preset: 'node-server',
-    output: {
-      dir: './dist',
-    },
-    sourceMap: false,
-    externals: {
-      external: Object.keys(pkg.dependencies),
-    },
-  },
 
   css: [
     '@unocss/reset/tailwind.css',
@@ -67,18 +70,12 @@ export default defineNuxtConfig({
       link: [
         { rel: 'icon', type: 'image/svg+xml', href: '/favicon.svg' },
       ],
+      meta: [
+        { name: 'viewport', content: 'width=device-width, initial-scale=1' },
+        { name: 'description', content: 'Calendrier de l`avent du Bar à jeux online' },
+        { name: 'apple-mobile-web-app-status-bar-style', content: 'black-translucent' },
+      ],
     },
-  },
-
-  vite: {
-    vue: {
-      script: {
-        defineModel: true,
-      },
-    },
-    plugins: [
-      vsharp(),
-    ],
   },
 
   supabase: {
@@ -104,6 +101,13 @@ export default defineNuxtConfig({
         persistSession: true,
         autoRefreshToken: true,
       },
+    },
+  },
+
+  devtools: {
+    enabled: true,
+    experimental: {
+      timeline: true,
     },
   },
 })
