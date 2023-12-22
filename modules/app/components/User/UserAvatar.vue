@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { useImage } from '@vueuse/core'
+
 defineOptions({
   name: 'UserAvatar',
 })
@@ -19,8 +21,13 @@ const styleAttr = computed(() => {
   else
     return null
 })
+
+const { isLoading } = useImage(computed(() => ({ src: avatarUrl.value })))
 </script>
 
 <template>
-  <div inline-block h-8 w-8 rounded-full bg-cover shadow ring-2 ring-emerald :style="styleAttr" />
+  <div v-if="isLoading" inline-block h-8 w-8 rounded-full bg-cover shadow ring-2 ring-emerald>
+    <Loader />
+  </div>
+  <div v-else inline-block h-8 w-8 rounded-full bg-cover shadow ring-2 ring-emerald :style="styleAttr" />
 </template>

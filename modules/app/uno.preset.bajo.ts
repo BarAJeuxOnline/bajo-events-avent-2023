@@ -25,12 +25,12 @@ const sizes = {
 
 const variantsColors = {
   default: {
-    bg: 'teal-100',
-    text: 'gray-500',
-    border: 'gray-500',
+    bg: 'black-500/20',
+    text: 'white',
+    border: 'none',
   },
   info: 'blue',
-  success: 'teal',
+  success: 'emerald',
   danger: 'red',
   warning: 'amber',
 }
@@ -139,6 +139,21 @@ export default function presetBajoTheme(): Preset {
           }
 
           return {}
+        },
+      ],
+      [
+        /^pattern-(fence)$/,
+        ([_, name]) => {
+          if (name === 'fence') {
+            return {
+              'background': `radial-gradient(27% 29% at right, #0000 83%,#e0cda7 85% 99%,#0000 101%) calc(25px/2) 25px,
+                  radial-gradient(27% 29% at left, #0000 83%,#e0cda7 85% 99%,#0000 101%) calc(25px/-2) 25px,
+                  radial-gradient(29% 27% at top, #0000 83%,#e0cda7 85% 99%,#0000 101%) 0 calc(25px/2),
+                  radial-gradient(29% 27% at bottom, #0000 83%,#e0cda7 85% 99%,#0000 101%) 0 calc(25px/-2)
+                  #465f49`,
+              'background-size': '50px 50px',
+            }
+          }
         },
       ],
     ],
@@ -258,10 +273,6 @@ export default function presetBajoTheme(): Preset {
             },
             'table td': {
               'font-weight': 700,
-            },
-            '.icon': {
-              width: '1em',
-              height: '1em',
             },
           })
             .map(([root, obj]) => {

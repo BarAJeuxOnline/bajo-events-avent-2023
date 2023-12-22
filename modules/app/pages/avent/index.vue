@@ -56,8 +56,11 @@ watchDebounced(codesModel, async (newCodes) => {
     </div>
   </SectionContainer>
 
-  <SectionContainer style="background-image: url(img/background-002.webp);" min-h-2xl bg-cover>
-    <div v-if="!loading" grid grid-cols="2 md:5" gap="4 md:8">
+  <SectionContainer pattern-fence min-h-2xl shadow-inset shadow-2xl>
+    <div
+      v-if="!loading" v-motion-slide-visible-once-bottom grid grid-cols="2 md:5"
+      gap="4 md:8"
+    >
       <div
         v-for="i in 24"
         :key="i"

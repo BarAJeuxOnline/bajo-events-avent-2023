@@ -32,6 +32,7 @@ const { user, nickname, isAventGranted, member, loading } = storeToRefs(useDisco
           </p>
           <p>
             <button
+              v-motion-pop
               bg-blue-600 text-white shadow-md btn
               @click="() => navigateTo('/avent')"
             >

@@ -57,6 +57,9 @@ importers:
       '@vueuse/core':
         specifier: 10.5.0
         version: 10.5.0(vue@3.3.13)
+      '@vueuse/motion':
+        specifier: ^2.0.0
+        version: 2.0.0(vue@3.3.13)
       '@vueuse/nuxt':
         specifier: 10.5.0
         version: 10.5.0(nuxt@3.8.2)(vue@3.3.13)
@@ -3012,6 +3015,26 @@ packages:
     resolution: {integrity: sha512-fEbElR+MaIYyCkeM0SzWkdoMtOpIwO72x8WsZHRE7IggiOlILttqttM69AS13nrDxosnDBYdyy3C5mR1LCxHsw==}
     dev: true
 
+  /@vueuse/motion@2.0.0(vue@3.3.13):
+    resolution: {integrity: sha512-V3TAlbt1OPmb9DZFoFCz9WC3Oue54t9VHlavSWm+VU1JNimYcd+pc6aGR/hgaHUAU9tOPRHoDTleSrv2zrdIsw==}
+    peerDependencies:
+      vue: '>=3.0.0'
+    dependencies:
+      '@vueuse/core': 10.5.0(vue@3.3.13)
+      '@vueuse/shared': 10.5.0(vue@3.3.13)
+      csstype: 3.1.3
+      framesync: 6.1.2
+      popmotion: 11.0.5
+      style-value-types: 5.1.2
+      vue: 3.3.13(typescript@5.3.3)
+    optionalDependencies:
+      '@nuxt/kit': 3.8.2
+    transitivePeerDependencies:
+      - '@vue/composition-api'
+      - rollup
+      - supports-color
+    dev: true
+
   /@vueuse/nuxt@10.5.0(nuxt@3.8.2)(vue@3.3.13):
     resolution: {integrity: sha512-x1mpjwcPB5DGA3cTM29Hf3bralslrma3Jr0fXm3Js3dbUHdadC/iVMf831W+sKPjZBhiZxR0S94B8gmGlvZ/1Q==}
     peerDependencies:
@@ -5020,6 +5043,12 @@ packages:
     resolution: {integrity: sha512-ZsDfxO51wGAXREY55a7la9LScWpwv9RxIrYABrlvOFBlH/ShPnrtsXeuUIfXKKOVicNxQ+o8JTbJvjS4M89yew==}
     dev: true
 
+  /framesync@6.1.2:
+    resolution: {integrity: sha512-jBTqhX6KaQVDyus8muwZbBeGGP0XgujBRbQ7gM7BRdS3CadCZIHiawyzYLnafYcvZIh5j8WE7cxZKFn7dXhu9g==}
+    dependencies:
+      tslib: 2.4.0
+    dev: true
+
   /fresh@0.5.2:
     resolution: {integrity: sha512-zJ2mQYM18rEFOudeV4GShTGIQ7RbzA7ozbU9I/XBpm7kqgMywgmylMwXHxZJmkVoYkna9d2pVXVXPdYTP9ej8Q==}
     engines: {node: '>= 0.6'}
@@ -5368,6 +5397,10 @@ packages:
     engines: {node: '>= 0.4'}
     dependencies:
       function-bind: 1.1.2
+    dev: true
+
+  /hey-listen@1.0.8:
+    resolution: {integrity: sha512-COpmrF2NOg4TBWUJ5UVyaCU2A88wEMkUPK4hNqyCkqHbxT92BbvfjoSozkAIIm6XhicGlJHhFdullInrdhwU8Q==}
     dev: true
 
   /hookable@5.5.3:
@@ -7154,6 +7187,15 @@ packages:
     engines: {node: '>=4'}
     dev: true
 
+  /popmotion@11.0.5:
+    resolution: {integrity: sha512-la8gPM1WYeFznb/JqF4GiTkRRPZsfaj2+kCxqQgr2MJylMmIKUwBfWW8Wa5fml/8gmtlD5yI01MP1QCZPWmppA==}
+    dependencies:
+      framesync: 6.1.2
+      hey-listen: 1.0.8
+      style-value-types: 5.1.2
+      tslib: 2.4.0
+    dev: true
+
   /postcss-calc@9.0.1(postcss@8.4.32):
     resolution: {integrity: sha512-TipgjGyzP5QzEhsOZUaIkeO5mKeMFpebWzRogWG/ysonUlnHcq5aJe0jOjpfzUU8PeSaBQnrE8ehR0QA5vs8PQ==}
     engines: {node: ^14 || ^16 || >=18.0}
@@ -8238,6 +8280,13 @@ packages:
       acorn: 8.11.2
     dev: true
 
+  /style-value-types@5.1.2:
+    resolution: {integrity: sha512-Vs9fNreYF9j6W2VvuDTP7kepALi7sk0xtk2Tu8Yxi9UoajJdEVpNpCov0HsLTqXvNGKX+Uv09pkozVITi1jf3Q==}
+    dependencies:
+      hey-listen: 1.0.8
+      tslib: 2.4.0
+    dev: true
+
   /stylehacks@6.0.1(postcss@8.4.32):
     resolution: {integrity: sha512-jTqG2aIoX2fYg0YsGvqE4ooE/e75WmaEjnNiP6Ag7irLtHxML8NJRxRxS0HyDpde8DRGuEXTFVHVfR5Tmbxqzg==}
     engines: {node: ^14 || ^16 || >=18.0}
@@ -8452,6 +8501,10 @@ packages:
       typescript: '>=4.2.0'
     dependencies:
       typescript: 5.3.3
+    dev: true
+
+  /tslib@2.4.0:
+    resolution: {integrity: sha512-d6xOpEDfsi2CZVlPQzGeux8XMwLT9hssAsaPYExaQMuYskwb+x1x7J371tWlbBdWHroy99KnVB6qIkUbs5X3UQ==}
     dev: true
 
   /tslib@2.6.2:
@@ -8991,7 +9044,7 @@ packages:
       '@babel/plugin-syntax-import-meta': 7.10.4(@babel/core@7.23.6)
       '@babel/plugin-transform-typescript': 7.23.6(@babel/core@7.23.6)
       '@vue/babel-plugin-jsx': 1.1.5(@babel/core@7.23.6)
-      '@vue/compiler-dom': 3.3.12
+      '@vue/compiler-dom': 3.3.13
       kolorist: 1.8.0
       magic-string: 0.30.5
       vite: 4.5.1

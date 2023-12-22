@@ -7,7 +7,7 @@ const { calendar, loading } = storeToRefs(useAvent())
 </script>
 
 <template>
-  <div flex-2 relative m-4 from-amber-500 via-amber-200 to-amber-700 bg-gradient-linear bg-gradient-to-r p-8 text-center font-bold text-white>
+  <div v-motion-roll-right flex-2 relative m-4 from-amber-500 via-amber-200 to-amber-700 bg-gradient-linear bg-gradient-to-r p-8 text-center font-bold text-white>
     <span underline underline-offset-8 text-shadow-md>Nombre de tickets obtenus:</span><br>
     <Loader v-if="loading" text-4xl />
     <span v-else pt-2 text-4xl font-bold text-shadow-md>{{ calendar?.nbr_tickets || 0 }}</span> <Icon name="i-twemoji-admission-tickets" label="Discord" mt--4 text-2xl />
