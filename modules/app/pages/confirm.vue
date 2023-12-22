@@ -16,24 +16,27 @@ const error = computed(() => route.query.error
     }
   : null)
 
+const { loadGuildMember } = useDiscord()
 const {
   member,
   isAventGranted,
 } = storeToRefs(useDiscord())
 
-whenever(member, async () => {
-  await nextTick()
-  if (isAventGranted.value)
-    navigateTo('/avent')
-  else
-    navigateTo('/')
-}, { immediate: true })
-
 const showButton = useTimeout(5000)
 
-onMounted(() => {
+onMounted(async () => {
   if (error.value)
     showButton.value = true
+  else
+    await useAsyncData('member', () => loadGuildMember())
+
+  whenever(member, async () => {
+    await nextTick()
+    if (isAventGranted.value)
+      navigateTo('/avent')
+    else
+      navigateTo('/')
+  }, { immediate: true })
 })
 </script>
 

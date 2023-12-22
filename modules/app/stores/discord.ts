@@ -192,6 +192,7 @@ export const useDiscord = defineStore('discord', () => {
     isAventGranted,
     avatarUrl,
     nickname,
+    loadGuildMember,
     signin,
     logout,
     $reset,

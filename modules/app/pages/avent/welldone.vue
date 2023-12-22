@@ -4,6 +4,8 @@ definePageMeta({
   layout: 'default',
   middleware: ['avent'],
 })
+
+const side = ref(0)
 </script>
 
 <template>
@@ -19,7 +21,8 @@ definePageMeta({
     </div>
   </SectionContainer>
 
-  <SectionContainer style="background-image: url('/img/background-002.webp');" min-h-2xl bg-cover>
-    <img src="/img/codes/avent_full_with_cases.png" alt="Calendrier de l'avent 2023" class="h-full w-full object-cover" cursor-pointer transition-transform hover:scale-102 btn-animation>
+  <SectionContainer bg-emerald-5 min-h-2xl bg-cover>
+    <img v-if="side === 0" src="/img/codes/avent_full_with_cases.png" alt="Calendrier de l'avent 2023" class="h-full w-full object-cover" cursor-pointer transition-transform hover:scale-102 btn-animation @click="() => side = 1">
+    <img v-if="side === 1" src="/img/codes/avent_of_bajo.png" alt="Calendrier de l'avent 2023" class="h-full w-full object-cover" cursor-pointer transition-transform hover:scale-102 btn-animation @click="() => side = 0">
   </sectioncontainer>
 </template>

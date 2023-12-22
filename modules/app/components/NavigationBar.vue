@@ -9,7 +9,7 @@ const {
 
 <template>
   <div pt-16 />
-  <SectionContainer :padding="false" fixed top-0 z-200 w-full bg-beige-500 text-white shadow-lg>
+  <SectionContainer :padding="false" md:px-8 px-4 fixed top-0 z-200 w-full bg-beige-500 text-white shadow-lg>
     <div h-16 flex items-center justify-between>
       <NuxtLink to="/" btn btn-animation>
         <Icon name="i-mdi-home" h-8 w-8 />

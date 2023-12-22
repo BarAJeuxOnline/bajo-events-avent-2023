@@ -41,9 +41,10 @@ watchDebounced(codesModel, async (newCodes) => {
         </p>
 
         <p>
-          Réussi à compléter au moins une case pour valider ta participation à la tombola de Noel 2023.<br>
+          Réussi à compléter au moins une case pour valider ta participation à la tombola de Noel 2023.
           <Icon name="i-twemoji-sparkles" /> Chaque case enregistrée est un ticket vers la gloire.
         </p>
+
         <p>
           Que se passera t'il si tu réussis à compléter tout le calendrier ? <Icon name="i-twemoji-see-no-evil-monkey" /><br>
           C'est Noel ! Aide toi de tes proches sur le BAJO pour essayer de le compléter ~ Un blackmarket <Icon name="i-twemoji-eyes" /> <Icon name="i-twemoji-face-with-peeking-eye" />
