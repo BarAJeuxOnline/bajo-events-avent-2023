@@ -2,7 +2,7 @@
 definePageMeta({
   name: 'WellDone',
   layout: 'default',
-  middleware: 'avent',
+  middleware: ['avent'],
 })
 </script>
 

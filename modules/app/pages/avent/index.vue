@@ -2,7 +2,7 @@
 definePageMeta({
   name: 'Avent',
   layout: 'default',
-  middleware: 'avent',
+  middleware: ['avent'],
 })
 
 const { updateCodes } = useAvent()

@@ -3,6 +3,8 @@ import pkg from './package.json'
 
 export default defineNuxtConfig({
   devtools: { enabled: true },
+  ssr: false,
+
   runtimeConfig: {
     public: {
       SENTRY_DSN: process.env.NUXT_PUBLIC_SENTRY_DSN || null,
@@ -88,7 +90,7 @@ export default defineNuxtConfig({
     redirectOptions: {
       login: '/',
       callback: '/confirm',
-      exclude: ['/', '/confirm', '/404'],
+      exclude: ['/avent', '/avent/welldone', '/public/*'],
     },
     cookieName: 'bajo',
     cookieOptions: {

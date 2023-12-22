@@ -1,16 +1,12 @@
 export default defineNuxtRouteMiddleware(async (to, _from) => {
-  const { isAventGranted, member, user, isReady } = storeToRefs(useDiscord())
-
-  if (!isReady.value)
-    return until(isReady).toBe(true, { timeout: 10000 })
+  const { isAventGranted, member, user } = storeToRefs(useDiscord())
+  const { calendar, loading } = storeToRefs(useAvent())
 
   if (user.value && !member.value)
     await until(member).not.toBeNull({ timeout: 10000 })
 
   if (!isAventGranted.value)
     return navigateTo('/')
-
-  const { calendar, loading } = storeToRefs(useAvent())
 
   if (loading.value)
     await until(loading).toBe(false, { timeout: 10000 })

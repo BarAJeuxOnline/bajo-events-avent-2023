@@ -7,9 +7,10 @@
   "description": "mini application for special event: Avent 2023",
   "author": "ChatonDeAru <hi@chatondearu.fr>",
   "scripts": {
-    "build": "nuxt build",
     "dev": "nuxt dev",
-    "preview": "nuxt preview",
+    "build": "nuxt build",
+    "preview": "npx serve ./dist/public",
+    "build:preview": "nuxt build && npx serve ./dist/public",
     "postinstall": "nuxt prepare"
   },
   "dependencies": {
