@@ -17,6 +17,7 @@ const { user, nickname, isAventGranted, member, loading } = storeToRefs(useDisco
 
     <div v-else-if="member">
       <h1 text-white text-shadow-lg>
+        <Icon name="i-twemoji-calendar" />
         Calendrier de l'avent 2023
       </h1>
 

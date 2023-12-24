@@ -59,15 +59,19 @@ whenever(() => flip.value === 10, async () => {
       </p>
     </GoldTicket>
 
-    <img absolute bottom-0 src="https://media0.giphy.com/media/sYGpCB44tS077gG909/giphy.gif?cid=ecf05e47ay73997okw58f21ph8j5okrwjf5ec65rvvqmots2&ep=v1_stickers_search&rid=giphy.gif&ct=s">
+    <img absolute bottom-0 right-4 md:h-auto h="1/3" src="https://media0.giphy.com/media/sYGpCB44tS077gG909/giphy.gif?cid=ecf05e47ay73997okw58f21ph8j5okrwjf5ec65rvvqmots2&ep=v1_stickers_search&rid=giphy.gif&ct=s">
   </div>
   <SectionContainer text-white>
     <div row-container>
       <div flex-1>
-        <h1>Félicitation ! <Icon name="i-twemoji-confetti-ball" /> Tu as réussi à compléter tous les morceaux du calendrier de l'avent ! <Icon name="i-twemoji-clinking-glasses" /></h1>
-        <p>Ce fond d'écran a été spécialement conçu pour cet évènement <Icon name="i-twemoji-two-hearts" /><br>Les animaux représentent les animaux totem du staff du Bar à Jeux Online. Ensemble, nous pouvons jouer à Ark Nova sans problème <Icon name="i-twemoji-face-with-hand-over-mouth" />.</p>
-        <p>Tu peux maintenant l'admirer, le télécharger, le partager, etc ...</p>
-        <p><Icon name="i-twemoji-sparkles" /> Pssst Psssssst, j'ai entendu dire que notre <span v-tooltip="'Chief Bot Officer'" underline-dashed cursor-help>C.B.O.</span> aime cacher des easter eggs <Icon name="i-twemoji-egg" /> ...</p>
+        <h1>Félicitation ! <Icon name="i-twemoji-confetti-ball" /></h1>
+        <p>
+          Tu as réussi à compléter tout les morceaux du calendrier de l'avent ! <Icon name="i-twemoji-clinking-glasses" /> Spécialement conçu pour cet évènement,
+          ce calendrier peut également servir de fond d’écran. Les animaux totem du staff du Bar à Jeux Online. y sont représentés.
+          Les animaux représentent les animaux totem du staff du Bar à Jeux Online.
+        </p>
+        <p>Tu peux maintenant l'admirer, le télécharger, le partager ... <Icon name="i-twemoji-sparkles" /></p>
+        <p>Pssst Psssssst, j'ai entendu dire que notre <span v-tooltip="'Chief Bot Officer'" underline-dashed cursor-help>C.B.O.</span> aime cacher des easter eggs en dehors des fêtes de Pâques... <Icon name="i-twemoji-moai" /></p>
       </div>
       <div flex-2>
         <TicketsCounter />

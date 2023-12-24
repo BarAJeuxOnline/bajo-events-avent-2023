@@ -251,7 +251,7 @@ export default function presetBajoTheme(): Preset {
       // Link
       {
         clickable: 'cursor-pointer select-none',
-        link: 'clickable text-blue-500 underline underline-offset-4 hover:underline-offset-8 transition-all duration-200 font-bold',
+        link: 'clickable underline underline-offset-4 hover:underline-offset-8 transition-all duration-200',
       },
     ],
     preflights: [

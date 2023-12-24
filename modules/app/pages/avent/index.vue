@@ -33,22 +33,20 @@ watchDebounced(codesModel, async (newCodes) => {
   <SectionContainer text-white text-shadow>
     <div row-container>
       <div flex-1>
-        <h1>Calendrier</h1>
+        <h1 text-shadow-lg>
+          <Icon name="i-twemoji-calendar" />
+          Calendrier de l'avent 2023
+        </h1>
 
         <p>
-          Bravo ! Tu as participé au calendrier de l'avent du Bar à Jeu Online 2023.<br>
-          Il est temps de rassembler les cases du calendrier tombées au fur et à mesure des jours et de les enregistrer ici. <Icon name="i-twemoji-floppy-disk" />
+          Il est temps de rassembler les cases du calendrier de l'avent tombées au fur et à mesure des jours et de les enregistrer ici. <Icon name="i-twemoji-floppy-disk" /><br>
+          Complète au moins une case pour valider ta participation à la tombola de Noel. <Icon name="i-twemoji-santa-claus" /><br>
+          Chaque case enregistrée est un ticket vers la gloire. <Icon name="i-twemoji-sparkles" />
         </p>
-
         <p>
-          Réussi à compléter au moins une case pour valider ta participation à la tombola de Noel 2023.
-          <Icon name="i-twemoji-sparkles" /> Chaque case enregistrée est un ticket vers la gloire.
+          C'est Noel ! Une surprise t’attend si tu réussis à compléter le calendrier en entier. <Icon name="i-twemoji-wrapped-gift" />
         </p>
-
-        <p>
-          Que se passera t'il si tu réussis à compléter tout le calendrier ? <Icon name="i-twemoji-see-no-evil-monkey" /><br>
-          C'est Noel ! Aide toi de tes proches sur le BAJO pour essayer de le compléter ~ Un blackmarket <Icon name="i-twemoji-eyes" /> <Icon name="i-twemoji-face-with-peeking-eye" />
-        </p>
+        <p>Tu as jusqu’à la fin de l’année, c’est à dire le 31 décembre 2023 à 23h59 pour le compléter. La tombola se déroulera le jour de la reprise des animations sur le BAJO, le <strong>2 janvier à 20h</strong> ! <Icon name="i-twemoji-hugging-face" /></p>
       </div>
       <div flex-2>
         <TicketsCounter />

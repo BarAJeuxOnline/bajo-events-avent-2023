@@ -10,7 +10,7 @@ const { signin } = useDiscord()
 
     <Card mt-8>
       <h5 mx-auto max-w-md>
-        Connecte toi avec ton compte Discord pour accéder au calendrier de l'avent 2023 spécial du BAJO <Icon name="i-twemoji-party-popper" />
+        Connecte toi avec ton compte Discord pour accéder au calendrier de l'avent 2023 du BAJO <Icon name="i-twemoji-party-popper" />
       </h5>
 
       <p mx-auto mt-8 max-w-md>
