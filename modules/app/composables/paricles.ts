@@ -1,40 +1,19 @@
-import { tsParticles } from '@tsparticles/engine'
-import { loadConfettiPreset } from '@tsparticles/preset-confetti'
-
-// TODO use it
+import Confetti from './confetti'
 
 export function useParticles() {
-  let particles: any
-
   const loading = ref(true)
 
-  onMounted(async () => {
-    await loadConfettiPreset(tsParticles)
-
-    await tsParticles.load({
-      id: 'tsparticles',
-      options: [
-        {
-          /* options here */
-        },
-        {
-          /* other options here */
-        },
-      ],
-      index: 1,
-    })
-
-    tsParticles.setOnClickHandler((event, particles) => {
-      /* custom on click handler */
-    })
-
-    particles = tsParticles.domItem(0)
-
-    loading.value = false
-  })
+  function show() {
+    const confetti = new Confetti('test')
+    confetti.setCount(75)
+    confetti.setSize(1)
+    confetti.setPower(25)
+    confetti.setFade(false)
+    confetti.destroyTarget(true)
+  }
 
   return {
-    particles,
+    show,
     loading,
   }
 }

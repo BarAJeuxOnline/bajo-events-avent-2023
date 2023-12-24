@@ -67,6 +67,54 @@ export const useAvent = defineStore('avent', () => {
     updating.value = false
   }
 
+  async function updateCodes(codes: string[]) {
+    updating.value = true
+
+    try {
+      const { data, error } = await client.functions.invoke('avent-api/codes', {
+        method: 'POST',
+        body: {
+          codes,
+        },
+      })
+
+      if (error)
+        throw error
+
+      if (data)
+        calendar.value = data
+    }
+    catch (error) {
+      console.error(error)
+    }
+
+    updating.value = false
+  }
+
+  async function getGoldenTicket() {
+    updating.value = true
+
+    try {
+      const { data, error } = await client.functions.invoke('avent-api/gold', {
+        method: 'POST',
+        body: {
+          gold: btoa(`100 patates ${user.value?.id}`),
+        },
+      })
+
+      if (error)
+        throw error
+
+      if (data)
+        calendar.value = data
+    }
+    catch (error) {
+      console.error(error)
+    }
+
+    updating.value = false
+  }
+
   function $reset() {
     loading.value = false
     calendar.value = null
@@ -79,6 +127,7 @@ export const useAvent = defineStore('avent', () => {
     loading,
     updating,
     calendar,
+    getGoldenTicket,
     updateCodes,
     $reset,
   }

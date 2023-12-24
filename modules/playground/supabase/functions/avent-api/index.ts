@@ -120,6 +120,14 @@ router
       else {
         const calendar = await getCalendarOrCreate(client, user.id)
 
+        const payload = await getPayload(context)
+        const gold = payload?.gold
+
+        if (!gold)
+          throw new Error('Invalid gold')
+        else if (atob(gold) !== `100 patates ${user.id}`)
+          throw new Error('Invalid gold')
+
         if (calendar.gold_ticket)
           throw new Error('Gold ticket already used')
 
@@ -130,7 +138,7 @@ router
           .from('event_avent_calendar')
           .update({
             gold_ticket: true,
-            total_tickets: calendar.nbr_tickets + (calendar.gold_ticket ? 5 : 0),
+            total_tickets: calendar.nbr_tickets + 5,
           })
           .eq('id', calendar.id)
           .select()

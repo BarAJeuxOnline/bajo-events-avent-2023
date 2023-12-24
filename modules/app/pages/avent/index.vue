@@ -7,15 +7,15 @@ definePageMeta({
 
 const { updateCodes } = useAvent()
 const { calendar, updating, loading } = storeToRefs(useAvent())
-
 const codesModel = ref<string[]>([])
 
-whenever(calendar, (newCalendar) => {
-  if (newCalendar.completed)
-    navigateTo('/avent/welldone')
+whenever(calendar, async (newCalendar) => {
+  if (newCalendar.completed) {
+    await new Promise(resolve => setTimeout(resolve, 1000))
+    return navigateTo('/avent/welldone')
+  }
 
-  else
-    codesModel.value = newCalendar.codes?.slice() || []
+  else if (codesModel.value.length === 0) { codesModel.value = newCalendar.codes?.slice() || [] }
 }, { immediate: true })
 
 watchDebounced(codesModel, async (newCodes) => {
@@ -58,35 +58,31 @@ watchDebounced(codesModel, async (newCodes) => {
 
   <SectionContainer pattern-fence min-h-2xl shadow-inset shadow-2xl>
     <div
-      v-if="!loading" v-motion-slide-visible-once-bottom grid grid-cols="2 md:5"
+      v-if="!loading" v-motion-slide-bottom grid grid-cols="2 md:5"
       gap="4 md:8"
     >
       <div
         v-for="i in 24"
         :key="i"
-        aspect="[4/3]" max-w="60 md:none" relative flex items-center justify-center rounded-2 bg-white text-center shadow-md
+        aspect="[4/3]" max-w="60 md:none" relative flex items-center justify-center rounded-2 bg-white text-center shadow-md overflow-hidden
       >
-        <div v-if="calendar?.validated_codes?.[i - 1]" absolute inset-0 flex items-center justify-center bg="white/20">
+        <div v-if="calendar?.validated_codes?.[i - 1]" absolute inset-0 flex items-center justify-center>
           <img :src="`/img/codes/case_${i}_${calendar.validated_codes[i - 1]}.png`" max-w-full w-full>
         </div>
-        <template v-else>
-          <div v-if="updating" absolute inset-0 bg="white/70" flex items-center justify-center>
-            <Loader h-8 w-8 text-gray-300 />
-          </div>
-          <div p-4>
-            <h2 mt-0>
-              {{ i }}
-            </h2>
-            <input
-              v-model.trim="codesModel[i - 1]"
-              type="text"
-              placeholder="####"
-              maxlength="4"
-              w-full b-1 b-beige-400 rounded-full bg-white p-2 text-center
-            >
-          </div>
-        </template>
+        <div v-else p-4 relative>
+          <Loader v-if="updating" h-4 w-4 lg:h-6 lg:w-6 text-green-300 absolute top-2 left-2 />
+          <h2 mt-0 md:text-2xl lg:text-5xl>
+            {{ i }}
+          </h2>
+          <input
+            v-model.trim="codesModel[i - 1]"
+            type="text"
+            placeholder="####"
+            maxlength="4"
+            w-full b-1 b-beige-400 rounded-full bg-white p-2 text-center mt-2 md:mt-0 lg:mt-2
+          >
+        </div>
       </div>
     </div>
-  </sectioncontainer>
+  </SectionContainer>
 </template>

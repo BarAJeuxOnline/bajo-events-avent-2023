@@ -8,9 +8,11 @@ definePageMeta({
   middleware: ['avent'],
 })
 
+const { getGoldenTicket } = useAvent()
+const { calendar } = storeToRefs(useAvent())
 const client = useSupabaseClient()
-
 const side = ref('0')
+const flip = ref(0)
 const motions = useMotions()
 
 const { isLoading: isLoadingCases } = useImage({ src: '/img/codes/avent_full_with_cases.png' })
@@ -34,16 +36,38 @@ async function downloadImage() {
     URL.revokeObjectURL(href)
   }
 }
+
+whenever(() => flip.value === 10, async () => {
+  getGoldenTicket()
+}, { immediate: true })
 </script>
 
 <template>
+  <div v-if="flip >= 10" v-motion-pop fixed inset-0 z-1000 centered bg="dark/50" flex-col>
+    <button btn text-white @click="flip = -1">
+      Ranger le ticket d'or<Icon name="i-mdi-close" icon-sm />
+    </button>
+    <GoldTicket v-motion-pop flex-2 font-extrabold px-16>
+      <p m-0 underline underline-offset-8 uppercase text-2xl>
+        golden tickets
+      </p>
+      <p text-shadow-md text-6xl uppercase underline underline-offset-8>
+        you win !
+      </p>
+      <p text-lg>
+        5 tickets supplémentaire
+      </p>
+    </GoldTicket>
+
+    <img absolute bottom-0 src="https://media0.giphy.com/media/sYGpCB44tS077gG909/giphy.gif?cid=ecf05e47ay73997okw58f21ph8j5okrwjf5ec65rvvqmots2&ep=v1_stickers_search&rid=giphy.gif&ct=s">
+  </div>
   <SectionContainer text-white>
     <div row-container>
       <div flex-1>
         <h1>Félicitation ! <Icon name="i-twemoji-confetti-ball" /> Tu as réussi à compléter tous les morceaux du calendrier de l'avent ! <Icon name="i-twemoji-clinking-glasses" /></h1>
         <p>Ce fond d'écran a été spécialement conçu pour cet évènement <Icon name="i-twemoji-two-hearts" /><br>Les animaux représentent les animaux totem du staff du Bar à Jeux Online. Ensemble, nous pouvons jouer à Ark Nova sans problème <Icon name="i-twemoji-face-with-hand-over-mouth" />.</p>
         <p>Tu peux maintenant l'admirer, le télécharger, le partager, etc ...</p>
-        <p><Icon name="i-twemoji-sparkles" /> Pssst Psssssst, j'ai entendu dire que notre <span title="Chief Bot Officer" underline-dashed cursor-help>C.B.O.</span> aime cacher des easter eggs <Icon name="i-twemoji-egg" /> ...</p>
+        <p><Icon name="i-twemoji-sparkles" /> Pssst Psssssst, j'ai entendu dire que notre <span v-tooltip="'Chief Bot Officer'" underline-dashed cursor-help>C.B.O.</span> aime cacher des easter eggs <Icon name="i-twemoji-egg" /> ...</p>
       </div>
       <div flex-2>
         <TicketsCounter />
@@ -51,7 +75,7 @@ async function downloadImage() {
     </div>
     <p text-center>
       <button btn @click="downloadImage">
-        Télécharger le fond d'écran
+        <Icon name="i-mdi-download" icon-xs />Télécharger le fond d'écran
       </button>
     </p>
   </SectionContainer>
@@ -73,6 +97,9 @@ async function downloadImage() {
       mode="out-in"
       @leave="async (el, done) => {
         await motions.flipMotion.leave(done)
+        if (flip >= 0 && !calendar?.gold_ticket) {
+          flip += 1
+        }
       }"
     >
       <div
@@ -87,7 +114,7 @@ async function downloadImage() {
         :leave="{
           rotateY: 90,
         }"
-        aspect="[32/21]" cursor-pointer
+        aspect="[32/21]" cursor-pointer select-none
         @click="() => side = side === '0' ? '1' : '0'"
       >
         <img

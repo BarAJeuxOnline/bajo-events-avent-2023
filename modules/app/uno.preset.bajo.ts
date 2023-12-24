@@ -156,6 +156,24 @@ export default function presetBajoTheme(): Preset {
           }
         },
       ],
+      [/^cutted-edge-(.*)$/, ([, c], { theme }) => {
+        const [color, colorSaturation] = c.split('-')
+        const themedColor = colorSaturation ? theme.colors[color]?.[colorSaturation] : theme.colors[color]
+
+        if (themedColor) {
+          return {
+            'background-image': [
+              `linear-gradient(45deg, transparent 75%, ${themedColor} 75%)`,
+              `linear-gradient(135deg, transparent 75%, ${themedColor} 75%)`,
+              `linear-gradient(-45deg, transparent 75%, ${themedColor} 75%)`,
+              `linear-gradient(-135deg, transparent 75%, ${themedColor} 75%)`,
+            ].join(', '),
+            'background-size': '30px 15px',
+            'background-repeat': 'repeat-y',
+            'background-position': '0 0, 0 0, 100% 0, 100% 0',
+          }
+        }
+      }],
     ],
     variants: [],
     shortcuts: [
@@ -168,6 +186,7 @@ export default function presetBajoTheme(): Preset {
 
       // containers
       {
+        'centered': 'flex items-center justify-center',
         'border-container': 'border-1 border-grey-100 rounded-lg',
         'content-container': 'container mx-auto px-4 py-10 md:px-8',
         'row-container': 'flex md:flex-row flex-col gap-4 md:gap-8',
@@ -175,6 +194,18 @@ export default function presetBajoTheme(): Preset {
         'block-8': 'p-4 md:p-8',
         'block-16': 'p-8 md:p-16',
       },
+
+      // Icons
+      {
+        icon: 'inline-flex items-center justify-center',
+      },
+      [
+        /^icon-(xs|sm|md|lg|xl)$/,
+        ([, size]) => {
+          const sizeNum = sizes[size as keyof typeof sizes]
+          return `h-${sizeNum} w-${sizeNum}`
+        },
+      ],
 
       // buttons
       {
