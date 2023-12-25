@@ -3,7 +3,7 @@ import { useImage } from '@vueuse/core'
 import { useMotions } from '@vueuse/motion'
 
 definePageMeta({
-  name: 'WellDone',
+  name: 'Calendar',
   layout: 'default',
   middleware: ['avent'],
 })
@@ -15,8 +15,8 @@ const side = ref('0')
 const flip = ref(0)
 const motions = useMotions()
 
-const { isLoading: isLoadingCases } = useImage({ src: '/img/codes/avent_full_with_cases.png' })
-const { isLoading: isLoadingCalendar } = useImage({ src: '/img/codes/avent_full_with_cases.png' })
+const { isLoading: isLoadingCases } = useImage({ src: '/img/codes/avent_full_with_cases.webp' })
+const { isLoading: isLoadingCalendar } = useImage({ src: '/img/codes/avent_full_with_cases.webp' })
 
 const isLoading = computed(() => isLoadingCases.value || isLoadingCalendar.value)
 
@@ -47,7 +47,8 @@ whenever(() => flip.value === 10, async () => {
     <button btn text-white @click="flip = -1">
       Ranger le ticket d'or<Icon name="i-mdi-close" icon-sm />
     </button>
-    <GoldTicket v-motion-pop flex-2 font-extrabold px-16>
+
+    <GoldTicket v-motion-pop flex-2 font-extrabold px-16 mt-8>
       <p m-0 underline underline-offset-8 uppercase text-2xl>
         golden tickets
       </p>
@@ -61,25 +62,48 @@ whenever(() => flip.value === 10, async () => {
 
     <img absolute bottom-0 right-4 md:h-auto h="1/3" src="https://media0.giphy.com/media/sYGpCB44tS077gG909/giphy.gif?cid=ecf05e47ay73997okw58f21ph8j5okrwjf5ec65rvvqmots2&ep=v1_stickers_search&rid=giphy.gif&ct=s">
   </div>
+
   <SectionContainer text-white>
     <div row-container>
       <div flex-1>
-        <h1>Félicitation ! <Icon name="i-twemoji-confetti-ball" /></h1>
-        <p>
-          Tu as réussi à compléter tout les morceaux du calendrier de l'avent ! <Icon name="i-twemoji-clinking-glasses" /> Spécialement conçu pour cet évènement,
-          ce calendrier peut également servir de fond d’écran. Les animaux totem du staff du Bar à Jeux Online. y sont représentés.
-          Les animaux représentent les animaux totem du staff du Bar à Jeux Online.
-        </p>
+        <template v-if="calendar?.completed">
+          <h1>
+            Félicitation ! <Icon name="i-twemoji-confetti-ball" />
+          </h1>
+          <p>
+            Tu as réussi à compléter tout les morceaux du calendrier de l'avent ! <Icon name="i-twemoji-clinking-glasses" /> Spécialement conçu pour cet évènement,
+            ce calendrier peut également servir de fond d’écran. Les animaux totem du staff du Bar à Jeux Online. y sont représentés.
+          </p>
+        </template>
+        <template v-else>
+          <h1>
+            <Icon name="i-twemoji-wrapped-gift" mt--2 /> Joyeux Noel
+          </h1>
+          <p>
+            Nous vous présentons le calendrier spécialement conçu pour cet évènement,
+            ce calendrier peut également servir de fond d’écran. Les animaux totem du staff du Bar à Jeux Online. y sont représentés.
+          </p>
+        </template>
+
         <p>Tu peux maintenant l'admirer, le télécharger, le partager ... <Icon name="i-twemoji-sparkles" /></p>
-        <p>Pssst Psssssst, j'ai entendu dire que notre <span v-tooltip="'Chief Bot Officer'" underline-dashed cursor-help>C.B.O.</span> aime cacher des easter eggs en dehors des fêtes de Pâques... <Icon name="i-twemoji-moai" /></p>
+
+        <p>
+          Pssst Psssssst, j'ai entendu dire que notre <span v-tooltip="'Chief Bot Officer'" underline-dashed cursor-help>C.B.O.</span>
+          aime cacher des easter eggs en dehors des fêtes de Pâques... <Icon name="i-twemoji-moai" />
+        </p>
       </div>
+
       <div flex-2>
         <TicketsCounter />
       </div>
     </div>
-    <p text-center>
+
+    <p row-container gap-4>
+      <NuxtLink btn to="/avent">
+        <Icon name="i-mdi-arrow-left" icon-xs /> Retourner sur mes cases
+      </NuxtLink>
       <button btn @click="downloadImage">
-        <Icon name="i-mdi-download" icon-xs />Télécharger le fond d'écran
+        <Icon name="i-mdi-download" icon-xs /> Télécharger le fond d'écran
       </button>
     </p>
   </SectionContainer>
@@ -122,14 +146,15 @@ whenever(() => flip.value === 10, async () => {
         @click="() => side = side === '0' ? '1' : '0'"
       >
         <img
-          :src="side === '0' ? '/img/codes/avent_full_with_cases.png' : '/img/codes/avent_of_bajo.png'"
+          :src="side === '0' ? '/img/codes/avent_full_with_cases.webp' : '/img/codes/avent_of_bajo.webp'"
           alt="Calendrier de l'avent 2023"
         >
       </div>
     </Transition>
+
     <div alert variant-info font-bold shadow-2xl mt-8>
       <p mt-0>
-        N'hésite pas à retourner le calendrier pour observer l'image au complet sans les portes du calendrier. 🚪
+        N'hésite pas à retourner (en cliquant dessus) le calendrier pour observer l'image au complet sans les portes du calendrier. 🚪
       </p>
     </div>
   </SectionContainer>

@@ -34,10 +34,10 @@ const { user, nickname, isAventGranted, member, loading } = storeToRefs(useDisco
           <p>
             <button
               v-motion-pop
-              bg-blue-600 text-white shadow-md btn
+              bg-blue-600 text-white shadow-md btn btn-lg
               @click="() => navigateTo('/avent')"
             >
-              <Icon name="i-twemoji-party-popper" mr-2 /> Découvrir le calendrier de l'avent
+              <Icon name="i-twemoji-party-popper" mr-2 /> Remplir le calendrier de l'avent
             </button>
           </p>
         </div>

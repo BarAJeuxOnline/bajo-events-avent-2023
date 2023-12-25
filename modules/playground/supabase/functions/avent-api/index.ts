@@ -131,8 +131,8 @@ router
         if (calendar.gold_ticket)
           throw new Error('Gold ticket already used')
 
-        if (!calendar.completed)
-          throw new Error('Calendar not completed')
+        // if (!calendar.completed)
+        //   throw new Error('Calendar not completed')
 
         const { data: updatedCalendar, error } = await client
           .from('event_avent_calendar')

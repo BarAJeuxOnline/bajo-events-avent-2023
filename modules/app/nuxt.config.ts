@@ -86,7 +86,7 @@ export default defineNuxtConfig({
     redirectOptions: {
       login: '/',
       callback: '/confirm',
-      exclude: ['/avent', '/avent/welldone', '/public/*'],
+      exclude: ['/avent', '/avent/calendar', '/public/*'],
     },
     cookieName: 'bajo',
     cookieOptions: {

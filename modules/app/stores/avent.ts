@@ -25,6 +25,17 @@ export const useAvent = defineStore('avent', () => {
   const updating = ref(false)
   const calendar = ref<Calendar | null>(null)
 
+  const christmas = ref(false)
+
+  function isChristmas() {
+    const date = new Date()
+    const month = date.getMonth()
+    const day = date.getDate()
+
+    if (month === 11 && day >= 25 || month === 0 && day <= 6)
+      christmas.value = true
+  }
+
   async function loadAvent() {
     loading.value = true
 
@@ -123,10 +134,13 @@ export const useAvent = defineStore('avent', () => {
 
   whenever(isAventGranted, loadAvent, { immediate: true })
 
+  isChristmas()
+
   return {
     loading,
     updating,
     calendar,
+    christmas,
     getGoldenTicket,
     updateCodes,
     $reset,

@@ -7,12 +7,20 @@ definePageMeta({
 
 const { updateCodes } = useAvent()
 const { calendar, updating, loading } = storeToRefs(useAvent())
+
 const codesModel = ref<string[]>([])
+const isChristmas = computed(() => {
+  const now = new Date()
+  const month = now.getMonth()
+  const day = now.getDate()
+
+  return month === 11 && day === 25
+})
 
 whenever(calendar, async (newCalendar) => {
   if (newCalendar.completed) {
     await new Promise(resolve => setTimeout(resolve, 1000))
-    return navigateTo('/avent/welldone')
+    return navigateTo('/avent/calendar')
   }
 
   else if (codesModel.value.length === 0) { codesModel.value = newCalendar.codes?.slice() || [] }
@@ -48,9 +56,22 @@ watchDebounced(codesModel, async (newCodes) => {
         </p>
         <p>Tu as jusqu’à la fin de l’année, c’est à dire le 31 décembre 2023 à 23h59 pour le compléter. La tombola se déroulera le jour de la reprise des animations sur le BAJO, le <strong>2 janvier à 20h</strong> ! <Icon name="i-twemoji-hugging-face" /></p>
       </div>
+
       <div flex-2>
         <TicketsCounter />
       </div>
+    </div>
+
+    <div v-if="isChristmas">
+      <p text-center>
+        <button
+          v-motion-pop
+          bg-blue-600 text-white shadow-md btn btn-lg
+          @click="() => navigateTo('/avent/calendar')"
+        >
+          <Icon name="i-twemoji-wrapped-gift" mr-2 /> Découvrir le calendrier de l'avent
+        </button>
+      </p>
     </div>
   </SectionContainer>
 
