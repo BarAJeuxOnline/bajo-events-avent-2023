@@ -9,6 +9,14 @@
       "path": "../modules/app"
     },
     {
+      "name": "admin",
+      "path": "../modules/admin"
+    },
+    {
+      "name": "shared",
+      "path": "../modules/shared"
+    },
+    {
       "name": "playground",
       "path": "../modules/playground"
     }

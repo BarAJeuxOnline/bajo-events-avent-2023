@@ -1,4 +1,3 @@
-import vsharp from 'vite-plugin-vsharp'
 import pkg from './package.json'
 
 export default defineNuxtConfig({
@@ -19,23 +18,16 @@ export default defineNuxtConfig({
   },
 
   nitro: {
-    routeRules: {
-      '/*': {
-        cors: true,
-      },
+    sourceMap: false,
+    externals: {
+      external: Object.keys(pkg.dependencies),
     },
-  },
-
-  vite: {
-    plugins: [
-      vsharp(),
-    ],
   },
 
   app: {
     head: {
       meta: [
-        { name: 'description', content: 'Calendrier de l`avent du Bar à jeux online' },
+        { name: 'description', content: 'Admin Avent 2023' },
       ],
     },
   },
@@ -48,7 +40,6 @@ export default defineNuxtConfig({
     redirectOptions: {
       login: '/',
       callback: '/confirm',
-      exclude: ['/avent', '/avent/calendar', '/public/*'],
     },
     cookieName: 'bajo',
     cookieOptions: {

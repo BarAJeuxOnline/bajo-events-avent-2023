@@ -6,16 +6,13 @@ auth.onAuthStateChange(async (event) => {
     navigateTo('/')
 })
 
-const { isReady } = storeToRefs(useDiscord())
-useAvent()
-
 useSeoMeta({
-  title: 'Calendrier de l\'avent 2023 - Bar à Jeu Online.',
+  title: 'Admin - Calendrier de l\'avent 2023 - Bar à Jeu Online.',
 })
 </script>
 
 <template>
   <NuxtLayout>
-    <NuxtPage v-if="isReady" />
+    <NuxtPage />
   </NuxtLayout>
 </template>

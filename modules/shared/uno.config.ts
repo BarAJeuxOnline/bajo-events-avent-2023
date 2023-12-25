@@ -9,7 +9,7 @@ import {
   transformerVariantGroup,
 } from 'unocss'
 
-import presetBajo from '@bajo-avent/shared/unocss/preset'
+import presetBajo from './unocss/preset'
 
 export default defineConfig({
   presets: [
