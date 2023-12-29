@@ -6,16 +6,9 @@ definePageMeta({
 })
 
 const { updateCodes } = useAvent()
-const { calendar, updating, loading } = storeToRefs(useAvent())
+const { calendar, updating, loading, christmas } = storeToRefs(useAvent())
 
 const codesModel = ref<string[]>([])
-const isChristmas = computed(() => {
-  const now = new Date()
-  const month = now.getMonth()
-  const day = now.getDate()
-
-  return month === 11 && day === 25
-})
 
 whenever(calendar, async (newCalendar) => {
   if (newCalendar.completed) {
@@ -62,7 +55,7 @@ watchDebounced(codesModel, async (newCodes) => {
       </div>
     </div>
 
-    <div v-if="isChristmas">
+    <div v-if="christmas">
       <p text-center>
         <button
           v-motion-pop

@@ -25,9 +25,7 @@ const {
 const showButton = useTimeout(5000)
 
 onMounted(async () => {
-  if (error.value)
-    showButton.value = true
-  else
+  if (!error.value)
     await useAsyncData('member', () => loadGuildMember())
 
   whenever(member, async () => {
