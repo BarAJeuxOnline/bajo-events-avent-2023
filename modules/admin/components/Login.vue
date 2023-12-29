@@ -4,12 +4,12 @@ const { signin } = useDiscord()
 
 <template>
   <SectionContainer>
-    <h1 text-white text-shadow-lg>
-      BAJO Connect
-    </h1>
-
-    <Card mt-8>
-      <p mx-auto mt-8 max-w-md>
+    <Card bg-white>
+      <template #title>
+        BAJO Connect
+      </template>
+      <p>Connection avec discord. Seul les administrateurs on accès à l'admin.</p>
+      <p>
         <button
           w-full bg-blue-600 text-white btn
           @click.prevent="() => signin()"

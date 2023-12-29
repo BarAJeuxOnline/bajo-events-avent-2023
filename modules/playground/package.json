@@ -1,5 +1,5 @@
 {
-  "name": "@bajo-avent-2023/supabase",
+  "name": "@bajo-avent/supabase",
   "type": "module",
   "version": "2.0.0",
   "private": true,
