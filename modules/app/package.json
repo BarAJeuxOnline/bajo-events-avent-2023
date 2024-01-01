@@ -27,11 +27,6 @@
     "@nuxt/devtools": "latest",
     "@nuxtjs/supabase": "^1.1.4",
     "@sentry/vue": "^7.91.0",
-    "@unocss/core": "^0.58.0",
-    "@unocss/eslint-config": "0.56.5",
-    "@unocss/nuxt": "0.56.5",
-    "@vueuse/core": "10.5.0",
-    "@vueuse/nuxt": "10.5.0",
     "nuxt": "^3.8.2",
     "vite-plugin-vsharp": "^1.6.0",
     "vue": "^3.3.13"

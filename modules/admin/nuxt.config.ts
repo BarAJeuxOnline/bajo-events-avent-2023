@@ -7,8 +7,6 @@ export default defineNuxtConfig({
     '@nuxtjs/supabase',
   ],
 
-  ssr: false,
-
   runtimeConfig: {
     public: {
       SENTRY_DSN: process.env.NUXT_PUBLIC_SENTRY_DSN || null,
