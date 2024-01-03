@@ -1,11 +1,10 @@
-# Nuxt application
+# BAJO App
 
 ## Setup
 
 Make sure to install the dependencies:
 
 ```bash
-# pnpm
 pnpm install
 ```
 
@@ -14,7 +13,6 @@ pnpm install
 Start the development server on `http://localhost:3000`:
 
 ```bash
-# pnpm
 pnpm run dev
 ```
 
@@ -23,14 +21,12 @@ pnpm run dev
 Build the application for production:
 
 ```bash
-# pnpm
 pnpm run build
 ```
 
 Locally preview production build:
 
 ```bash
-# pnpm
 pnpm run preview
 ```
 

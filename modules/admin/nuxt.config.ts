@@ -10,7 +10,7 @@ export default defineNuxtConfig({
   runtimeConfig: {
     public: {
       SENTRY_DSN: process.env.NUXT_PUBLIC_SENTRY_DSN || null,
-      baseUrl: process.env.NUXT_PUBLIC_BASE_URL || 'http://localhost:3000',
+      baseUrl: process.env.NUXT_PUBLIC_BASE_URL || 'http://localhost:3001',
       guildId: process.env.NUXT_PUBLIC_DISCORD_GUILD_ID || null,
     },
   },

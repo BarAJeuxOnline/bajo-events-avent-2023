@@ -7,6 +7,7 @@
   "description": "mini application for special event: Avent 2023",
   "author": "ChatonDeAru <hi@chatondearu.fr>",
   "scripts": {
+    "dev": "pnpm run dev -r",
     "up": "npx taze major -I"
   },
   "dependencies": {

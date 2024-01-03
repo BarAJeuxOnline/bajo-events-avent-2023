@@ -1,5 +1,4 @@
 import vsharp from 'vite-plugin-vsharp'
-import pkg from './package.json'
 
 export default defineNuxtConfig({
   extends: ['@bajo-avent/shared'],

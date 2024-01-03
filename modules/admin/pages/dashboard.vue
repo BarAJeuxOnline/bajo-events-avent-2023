@@ -15,8 +15,8 @@ const users = computed(() => {
   // merging discord metadata and filtering out staff
   return dataUsers.value?.users.map(u => ({
     ...u,
-    ...u.user_metadata.guildMember,
-  })).filter(u => !u.roles.includes(STAFF_ROLE_ID)) ?? []
+    ...u.user_metadata.guildMember || {},
+  })).filter(u => !u.roles?.includes(STAFF_ROLE_ID)) ?? []
 })
 
 const calendars = computed(() => {
@@ -54,7 +54,7 @@ function getNick(user) {
 
     <Card title="Calendars">
       <div flex flex-col gap-4>
-        <Card v-for="calendar in calendars" :key="calendar.id">
+        <Card v-for="calendar in calendars" :key="calendar.id" bg="!beige-100">
           <div grid grid-cols-5>
             <p mt-0 font-bold text-lg>{{ getNick(calendar.user) }}</p>
             <p mt-0>

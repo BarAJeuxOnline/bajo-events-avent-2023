@@ -3,6 +3,16 @@ import { CORS } from 'https://deno.land/x/oak_cors@v0.1.1/mod.ts'
 import { getClient, getUser } from '../_shared/client.ts'
 import { CODES } from '../_shared/codes.ts'
 
+function isNewYear() {
+  const date = new Date()
+  const year = date.getFullYear()
+
+  if (year >= 2024)
+    return true
+  else
+    return false
+}
+
 async function getPayload(context: any) {
   const body = context.request.body()
 
@@ -87,10 +97,14 @@ router
           .from('event_avent_calendar')
           .update({
             codes,
-            validated_codes: validatedCodes,
-            nbr_tickets: validatedCodes.filter(v => !!v).length,
-            completed: validatedCodes.filter(v => !!v).length === 24,
-            total_tickets: validatedCodes.filter(v => !!v).length + (calendar.gold_ticket ? 5 : 0),
+            ...(isNewYear()
+              ? {}
+              : {
+                  validated_codes: validatedCodes,
+                  nbr_tickets: validatedCodes.filter(v => !!v).length,
+                  completed: validatedCodes.filter(v => !!v).length === 24,
+                  total_tickets: validatedCodes.filter(v => !!v).length + (calendar.gold_ticket ? 5 : 0),
+                }),
           })
           .eq('id', calendar.id)
           .select()
@@ -131,8 +145,8 @@ router
         if (calendar.gold_ticket)
           throw new Error('Gold ticket already used')
 
-        // if (!calendar.completed)
-        //   throw new Error('Calendar not completed')
+        if (isNewYear())
+          throw new Error('Happy new year !! you can\'t validate gold ticket anymore')
 
         const { data: updatedCalendar, error } = await client
           .from('event_avent_calendar')

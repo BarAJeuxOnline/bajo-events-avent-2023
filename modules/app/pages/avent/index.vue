@@ -6,7 +6,7 @@ definePageMeta({
 })
 
 const { updateCodes } = useAvent()
-const { calendar, updating, loading, christmas } = storeToRefs(useAvent())
+const { calendar, updating, loading, christmas, newYear } = storeToRefs(useAvent())
 
 const codesModel = ref<string[]>([])
 
@@ -55,14 +55,24 @@ watchDebounced(codesModel, async (newCodes) => {
       </div>
     </div>
 
-    <div v-if="christmas">
-      <p text-center>
+    <div row-container justify-center>
+      <p v-if="christmas" text-center>
         <button
           v-motion-pop
           bg-blue-600 text-white shadow-md btn btn-lg
           @click="() => navigateTo('/avent/calendar')"
         >
           <Icon name="i-twemoji-wrapped-gift" mr-2 /> Découvrir le calendrier de l'avent
+        </button>
+      </p>
+
+      <p v-if="newYear" text-center>
+        <button
+          v-motion-pop
+          bg-blue-600 text-white shadow-md btn btn-lg
+          @click="() => navigateTo('/avent/tas')"
+        >
+          <Icon name="i-twemoji-ticket" mr-2 /> Voir les résultats de la tombola
         </button>
       </p>
     </div>

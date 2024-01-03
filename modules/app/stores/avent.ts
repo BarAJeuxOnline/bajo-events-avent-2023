@@ -11,6 +11,7 @@ interface Calendar {
   user: string
   validated_codes: string[] | null
   win_position: number | null
+  bga_gift_code: string | null
 }
 
 export const useAvent = defineStore('avent', () => {
@@ -24,8 +25,8 @@ export const useAvent = defineStore('avent', () => {
   const loading = ref(false)
   const updating = ref(false)
   const calendar = ref<Calendar | null>(null)
-
-  const christmas = ref(false)
+  const christmas = ref(isChristmas())
+  const newYear = ref(isNewYear())
 
   function isChristmas() {
     const date = new Date()
@@ -33,7 +34,19 @@ export const useAvent = defineStore('avent', () => {
     const day = date.getDate()
 
     if (month === 11 && day >= 25 || month === 0 && day <= 6)
-      christmas.value = true
+      return true
+    else
+      return false
+  }
+
+  function isNewYear() {
+    const date = new Date()
+    const year = date.getFullYear()
+
+    if (year >= 2024)
+      return true
+    else
+      return false
   }
 
   async function loadAvent() {
@@ -134,13 +147,12 @@ export const useAvent = defineStore('avent', () => {
 
   whenever(isAventGranted, loadAvent, { immediate: true })
 
-  isChristmas()
-
   return {
     loading,
     updating,
     calendar,
     christmas,
+    newYear,
     getGoldenTicket,
     updateCodes,
     $reset,

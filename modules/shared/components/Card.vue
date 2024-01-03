@@ -9,7 +9,7 @@ defineProps<{
 </script>
 
 <template>
-  <div rounded-2 bg="white/80" shadow-lg>
+  <div rounded-2 bg-white shadow-lg>
     <h5 v-if="title || $slots.title" border-b-1 px-8 py-4>
       <slot name="title">
         {{ title }}
