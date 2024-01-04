@@ -5,37 +5,15 @@ definePageMeta({
   middleware: 'auth',
 })
 
-const STAFF_ROLE_ID = '818112629607235594'
-
-const { data: dataUsers, error: errorUsers, pending: pendingUsers } = await useFetch('/api/users')
-const { data: dataCalendars, error: errorCalendar, pending: pendingCalendar } = await useFetch('/api/calendars')
-const pending = computed(() => pendingUsers.value || pendingCalendar.value)
-
-const users = computed(() => {
-  // merging discord metadata and filtering out staff
-  return dataUsers.value?.users.map(u => ({
-    ...u,
-    ...u.user_metadata.guildMember || {},
-  })).filter(u => !u.roles?.includes(STAFF_ROLE_ID)) ?? []
-})
-
-const calendars = computed(() => {
-  return dataCalendars.value?.calendars.map(c => ({
-    ...c,
-    user: users.value.find(u => u.id === c.user),
-  })).filter(c => c.user) ?? []
-})
-
-function getNick(user) {
-  return user?.nick || user?.user?.global_name || user?.user?.username || 'un lutin'
-}
+const { getNick } = useData()
+const { loading, calendars, users } = storeToRefs(useData())
 </script>
 
 <template>
   <SectionContainer>
     <h1 class="text-white text-shadow-lg">Dashboard</h1>
 
-    <Loader v-if="pending" />
+    <Loader v-if="loading" />
 
     <div row-container>
       <Card title="Nombre de membres">

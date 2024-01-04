@@ -157,8 +157,8 @@ export const useDiscord = defineStore('discord', () => {
     const { provider_token, user } = session || {}
     const guildMember = user?.user_metadata.guildMember
 
-    if (import.meta.env.DEV)
-      console.log('discord auth state change:', event, session)
+    // if (import.meta.env.DEV)
+    //   console.log('discord auth state change:', event, session)
 
     if (
       (event === 'SIGNED_IN' || (event === 'INITIAL_SESSION' && user && !guildMember))
