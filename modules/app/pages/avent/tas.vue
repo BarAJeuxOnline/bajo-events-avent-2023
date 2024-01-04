@@ -84,7 +84,7 @@ const { calendar } = useAvent()
           À très vite pour des soirées jeux endiablées 🥰
         </p>
         <p>
-          ...
+          Donne ton avis sur le calendrier de l'avent 2023 en répondant à ce <a link text-blue href="https://forms.gle/GV7b7kCwGtGBNA1M8" target="_blank">formulaire</a>.
         </p>
       </Card>
     </template>

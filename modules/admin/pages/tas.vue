@@ -15,8 +15,6 @@ const { loading, calendars } = storeToRefs(useData())
 const winners = ref([])
 const inProgress = ref(false)
 
-const 
-
 const tickets = computed(() => calendars.value.map(calendar =>
   winners.value.find(w => w.id === calendar.user?.id) ?
     [] :
